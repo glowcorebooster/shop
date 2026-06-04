@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /products.json
+
+Sitemap: https://www.glowcorebooster.com/sitemap.xml

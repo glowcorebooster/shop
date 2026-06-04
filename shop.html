@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop All Products — GlowCore Booster ✨</title>
+  <meta name="description" content="Browse all GlowCore Booster premium health supplements."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@700;800;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--pink:#ff2d87;--hot:#ff0066;--orange:#ff6b00;--gold:#ffaa00;--yellow:#ffe033;--bg:#fff8fc;--white:#fff;--text:#1a0010;--muted:#8a5070;--border:rgba(255,45,135,.18);}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;min-height:100vh;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;border:6px solid transparent;border-image:linear-gradient(var(--angle,0deg),#ff2d87,#ff6b00,#ffaa00,#ffe033,#ff6b00,#ff2d87) 1;animation:rotateBorder 3s linear infinite;}
+    @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+    @keyframes rotateBorder{to{--angle:360deg;}}
+    .particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .particle{position:absolute;border-radius:50%;animation:particleFloat linear infinite;opacity:0;}
+    @keyframes particleFloat{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:.8;}90%{opacity:.3;}100%{transform:translateY(-20px) scale(1.5);opacity:0;}}
+    .mesh-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 0% 0%,rgba(255,45,135,.12) 0%,transparent 45%),radial-gradient(ellipse at 100% 0%,rgba(255,107,0,.1) 0%,transparent 45%),radial-gradient(ellipse at 50% 100%,rgba(255,170,0,.1) 0%,transparent 45%);animation:meshShift 8s ease-in-out infinite alternate;}
+    @keyframes meshShift{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(20deg);}}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;gap:.85rem;padding:.7rem 1.5rem;margin:6px;border-radius:16px;background:rgba(255,248,252,.93);backdrop-filter:blur(20px);border:2px solid transparent;background-clip:padding-box;box-shadow:0 4px 30px rgba(255,45,135,.12);}
+    nav::before{content:'';position:absolute;inset:-2px;border-radius:18px;z-index:-1;background:linear-gradient(135deg,var(--pink),var(--orange),var(--gold),var(--pink));background-size:300% 300%;animation:gradShift 4s ease infinite;}
+    @keyframes gradShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+    .nav-logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;flex-shrink:0;}
+    .nav-logo img{width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(255,45,135,.35));}
+    .nav-brand{font-family:'Lilita One',cursive;font-size:1rem;background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;}
+    .nav-search{flex:1;max-width:360px;position:relative;min-width:0;}
+    .nav-search-input{width:100%;padding:.52rem 2rem .52rem 2.1rem;background:rgba(255,45,135,.06);border:2px solid rgba(255,45,135,.16);border-radius:99px;color:var(--text);font-size:.78rem;font-family:'Poppins',sans-serif;font-weight:500;transition:all .25s;}
+    .nav-search-input:focus{outline:none;border-color:var(--pink);background:rgba(255,45,135,.1);box-shadow:0 0 0 4px rgba(255,45,135,.1);}
+    .nav-search-input::placeholder{color:var(--muted);}
+    .nav-search-icon{position:absolute;left:.7rem;top:50%;transform:translateY(-50%);font-size:.78rem;pointer-events:none;color:var(--muted);}
+    .nav-search-clear{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;background:var(--pink);border:none;color:#fff;font-size:.55rem;cursor:pointer;display:none;align-items:center;justify-content:center;}
+    .nav-search-clear.show{display:flex;}
+    .nav-socials{display:flex;gap:.38rem;flex-shrink:0;margin-left:auto;}
+    .nav-social{width:30px;height:30px;border-radius:8px;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;transition:transform .2s;flex-shrink:0;}
+    .nav-social:hover{transform:translateY(-2px) scale(1.1);}
+    .nav-social.fb{background:linear-gradient(135deg,#1877f2,#0a5bc4);}
+    .nav-social.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
+    .nav-social.yt{background:linear-gradient(135deg,#ff0000,#cc0000);}
+    .nav-social.tt{background:linear-gradient(135deg,#010101,#2d2d2d);}
+    @media(max-width:700px){nav{padding:.6rem 1rem;margin:4px;gap:.5rem;}.nav-brand{display:none;}.nav-search{max-width:180px;}.nav-socials{display:none;}}
+
+    /* PAGE HEADER */
+    .page-header{padding:7rem 1.5rem 2rem;text-align:center;position:relative;z-index:1;}
+    .page-header h1{font-family:'Lilita One',cursive;font-size:clamp(2rem,5vw,3rem);background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem;}
+    .page-header p{font-size:.88rem;color:var(--muted);font-weight:500;}
+    .results-count{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:.5rem;}
+    .results-count span{color:var(--hot);font-weight:700;}
+
+    /* MAIN */
+    .shop-main{max-width:1280px;margin:0 auto;padding:0 1.5rem 5rem;position:relative;z-index:1;}
+
+    /* GRID */
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.6rem;margin-bottom:3rem;}
+
+    /* CARD */
+    .prod-card{background:#fff;border-radius:22px;overflow:visible;position:relative;border:3px solid transparent;background-clip:padding-box;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:cardReveal .5s cubic-bezier(.16,1,.3,1) both;}
+    .prod-card::after{content:'';position:absolute;inset:-3px;border-radius:25px;z-index:-1;background:linear-gradient(135deg,var(--pink),var(--orange),var(--gold),var(--pink));background-size:300% 300%;animation:gradShift 4s ease infinite;}
+    @keyframes cardReveal{from{opacity:0;transform:translateY(20px) scale(.97);}to{opacity:1;transform:none;}}
+    .prod-card:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 24px 60px rgba(255,45,135,.18);}
+    .ribbon{position:absolute;top:12px;left:-4px;z-index:3;background:linear-gradient(135deg,var(--hot),var(--orange));color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.26rem .7rem .26rem .5rem;border-radius:0 6px 6px 0;box-shadow:2px 3px 10px rgba(255,45,135,.35);}
+    .card-img-link{display:block;overflow:hidden;border-radius:19px 19px 0 0;cursor:pointer;}
+    .card-img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .4s ease;}
+    .prod-card:hover .card-img{transform:scale(1.05);}
+    .card-img-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#ffe0f0,#fff5e0,#ffe8cc);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;cursor:pointer;}
+    .card-img-placeholder span{font-size:3rem;}
+    .card-body{padding:1rem 1.1rem 1.1rem;}
+    .card-text-link{display:block;text-decoration:none;color:inherit;cursor:pointer;margin-bottom:.6rem;}
+    .card-text-link:hover .card-title{color:var(--hot);}
+    .card-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:.98rem;color:var(--text);margin-bottom:.3rem;line-height:1.3;transition:color .2s;}
+    .card-desc{font-size:.74rem;color:var(--muted);line-height:1.6;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .card-footer{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.6rem;}
+    .card-price{font-family:'Lilita One',cursive;font-size:1.35rem;background:linear-gradient(135deg,var(--hot),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .buy-btn{display:inline-flex;align-items:center;gap:.35rem;background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:.8rem;padding:.55rem 1.05rem;border-radius:10px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 4px 14px rgba(255,45,135,.28);transition:transform .2s,box-shadow .2s;white-space:nowrap;}
+    .buy-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(255,107,0,.4);}
+
+    /* PAGINATION */
+    .pagination{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:1rem;}
+    .pg-btn{width:42px;height:42px;border-radius:12px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+    .pg-btn:hover{border-color:var(--pink);color:var(--hot);background:rgba(255,45,135,.05);}
+    .pg-btn.active{background:linear-gradient(135deg,var(--hot),var(--orange));border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(255,45,135,.3);}
+    .pg-btn.disabled{opacity:.4;cursor:not-allowed;}
+    .pg-btn.disabled:hover{border-color:var(--border);color:var(--muted);background:#fff;}
+
+    /* EMPTY */
+    .empty-search{text-align:center;padding:4rem 2rem;color:var(--muted);}
+    .empty-search .ei{font-size:3rem;margin-bottom:.8rem;}
+    .empty-search p{font-size:.9rem;font-weight:500;line-height:1.8;}
+
+    /* LOADING */
+    .loading-wrap{text-align:center;padding:4rem 2rem;}
+    .loading-dots{display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem;}
+    .loading-dots span{width:12px;height:12px;border-radius:50%;animation:bounceDot 1.2s infinite ease-in-out;}
+    .loading-dots span:nth-child(1){background:var(--pink);animation-delay:0s;}
+    .loading-dots span:nth-child(2){background:var(--orange);animation-delay:.15s;}
+    .loading-dots span:nth-child(3){background:var(--gold);animation-delay:.3s;}
+    @keyframes bounceDot{0%,100%{transform:translateY(0) scale(.8);opacity:.4;}50%{transform:translateY(-12px) scale(1.1);opacity:1;}}
+    .loading-wrap p{font-size:.85rem;color:var(--muted);}
+
+    /* FOOTER */
+    footer{position:relative;z-index:1;text-align:center;padding:2.5rem 2rem;background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));margin:0 8px 8px;border-radius:24px 24px 0 0;}
+    footer p{font-size:.72rem;color:#fff;opacity:.85;font-weight:500;}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);z-index:9999;background:var(--text);color:#fff;font-size:.8rem;font-weight:700;padding:.65rem 1.4rem;border-radius:99px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  </style>
+</head>
+<body>
+<div class="particles" id="particles"></div>
+<div class="mesh-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html" aria-label="GlowCore Booster Home">
+    <img src="images/glowcorebooster.webp" alt="GlowCore" onerror="this.style.display='none'"/>
+    <span class="nav-brand">GlowCoreBooster</span>
+  </a>
+  <div class="nav-search">
+    <span class="nav-search-icon">🔍</span>
+    <input class="nav-search-input" id="searchInput" type="text" placeholder="Search products…" oninput="onSearch(this.value)" autocomplete="off"/>
+    <button class="nav-search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search">✕</button>
+  </div>
+  <div class="nav-socials">
+    <a class="nav-social fb" href="https://facebook.com/glowcorebooster" target="_blank" rel="noopener" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+    <a class="nav-social ig" href="https://instagram.com/glowcorebooster" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></a>
+    <a class="nav-social yt" href="https://youtube.com/@glowcorebooster" target="_blank" rel="noopener" aria-label="YouTube"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#ff0000"/></svg></a>
+    <a class="nav-social tt" href="https://tiktok.com/@glowcorebooster" target="_blank" rel="noopener" aria-label="TikTok"><svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l-.04-8.33a8.27 8.27 0 0 0 4.84 1.55V4.98a4.85 4.85 0 0 1-1.03-.29z"/></svg></a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>🛍️ All Products</h1>
+  <p>Browse our full collection of premium health & beauty supplements</p>
+  <div class="results-count" id="resultsCount"></div>
+</div>
+
+<!-- MAIN -->
+<main>
+<div class="shop-main">
+  <div id="shopGrid"><div class="loading-wrap"><div class="loading-dots"><span></span><span></span><span></span></div><p>Loading products…</p></div></div>
+  <div class="pagination" id="pagination"></div>
+</div>
+
+</main>
+<!-- FOOTER -->
+<footer><p>&copy; 2026 GlowCore Booster · All rights reserved · Made in the United States</p></footer>
+<div id="toast">✅ Link copied!</div>
+
+<script>
+const SITE_URL=window.location.origin;
+const PER_PAGE=12;
+let allProducts=[],filtered=[],currentPage=1,searchQuery='';
+
+(function(){
+  const c=document.getElementById('particles');
+  const cols=['#ff2d87','#ff6b00','#ffaa00','#ffe033','#ff9ec4'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;width:${4+Math.random()*5}px;height:${4+Math.random()*5}px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*8}s;`;
+    c.appendChild(p);
+  }
+})();
+
+async function loadProducts(){
+  try{
+    const res=await fetch('products.json?t='+Date.now());
+    const data=await res.json();
+    allProducts=data.filter(p=>p.published);
+  }catch(e){allProducts=[];}
+  filterAndRender();
+}
+
+function onSearch(val){
+  searchQuery=val.trim();
+  document.getElementById('searchClear').classList.toggle('show',searchQuery.length>0);
+  currentPage=1;filterAndRender();
+}
+function clearSearch(){
+  document.getElementById('searchInput').value='';
+  document.getElementById('searchClear').classList.remove('show');
+  searchQuery='';currentPage=1;filterAndRender();
+}
+
+function filterAndRender(){
+  const q=searchQuery.toLowerCase();
+  filtered=searchQuery
+    ? allProducts.filter(p=>(p.title||'').toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q))
+    : [...allProducts];
+  renderGrid();renderPagination();
+  const rc=document.getElementById('resultsCount');
+  rc.innerHTML=filtered.length
+    ? `Showing <span>${filtered.length}</span> product${filtered.length!==1?'s':''}`
+    : '';
+}
+
+function renderGrid(){
+  const start=(currentPage-1)*PER_PAGE;
+  const page=filtered.slice(start,start+PER_PAGE);
+  const grid=document.getElementById('shopGrid');
+  if(!filtered.length){
+    grid.innerHTML=`<div class="empty-search"><div class="ei">🔍</div><p>${searchQuery?'Walang nahanap. Subukan ang ibang keyword.':'No products yet.'}</p></div>`;
+    return;
+  }
+  grid.innerHTML=`<div class="products-grid">`+page.map((p,i)=>{
+    const price=(p.variants&&p.variants[0])?p.variants[0].price:'';
+    const checkoutUrl=(p.variants&&p.variants[0]&&p.variants[0].checkoutLink)?`checkout-page.html?link=${encodeURIComponent(p.variants[0].checkoutLink)}`:'#';
+    return `
+    <div class="prod-card" style="animation-delay:${i*.06}s;">
+      <div class="ribbon">✨ Best Seller</div>
+      <div class="card-img-link" onclick="window.location='product.html?id=${p.id}'">
+        ${p.imageUrl
+          ?`<img class="card-img" src="${esc(p.imageUrl.replace(/^\//,''))}" alt="${esc(p.title||'')}" onerror="this.parentElement.innerHTML='<div class=card-img-placeholder><span>✨</span></div>'">`
+          :`<div class="card-img-placeholder"><span>✨</span></div>`}
+      </div>
+      <div class="card-body">
+        <div class="card-text-link" onclick="window.location='product.html?id=${p.id}'">
+          <div class="card-title">${hl(p.title||'',searchQuery)}</div>
+          <div class="card-desc">${hl(p.description||'',searchQuery)}</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">${esc(price)}</div>
+          <a class="buy-btn" href="${checkoutUrl}">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('')+`</div>`;
+}
+
+function renderPagination(){
+  const total=Math.ceil(filtered.length/PER_PAGE);
+  const pg=document.getElementById('pagination');
+  if(total<=1){pg.innerHTML='';return;}
+  let html='';
+  html+=`<button class="pg-btn${currentPage===1?' disabled':''}" onclick="changePage(${currentPage-1})">‹</button>`;
+  for(let i=1;i<=total;i++){
+    html+=`<button class="pg-btn${i===currentPage?' active':''}" onclick="changePage(${i})">${i}</button>`;
+  }
+  html+=`<button class="pg-btn${currentPage===total?' disabled':''}" onclick="changePage(${currentPage+1})">›</button>`;
+  pg.innerHTML=html;
+}
+
+function changePage(n){
+  const total=Math.ceil(filtered.length/PER_PAGE);
+  if(n<1||n>total)return;
+  currentPage=n;
+  renderGrid();renderPagination();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function hl(text,q){
+  if(!q)return esc(text);
+  const safe=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return esc(text).replace(new RegExp(`(${safe})`,'gi'),'<span style="background:rgba(255,45,135,.14);color:var(--hot);border-radius:3px;padding:0 2px;">$1</span>');
+}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+loadProducts();
+</script>
+</body>
+</html>

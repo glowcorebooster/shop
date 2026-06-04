@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product — GlowCore Booster ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@700;800;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --pink:#ff2d87;--hot:#ff0066;--orange:#ff6b00;
+      --gold:#ffaa00;--yellow:#ffe033;
+      --bg:#fff8fc;--white:#ffffff;
+      --text:#1a0010;--muted:#8a5070;
+      --border:rgba(255,45,135,0.18);
+    }
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;min-height:100vh;overflow-x:hidden;}
+
+    /* ANIMATED BORDER FRAME */
+    body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;border:6px solid transparent;border-image:linear-gradient(var(--angle,0deg),#ff2d87,#ff6b00,#ffaa00,#ffe033,#ff6b00,#ff2d87) 1;animation:rotateBorder 3s linear infinite;}
+    @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+    @keyframes rotateBorder{to{--angle:360deg;}}
+
+    /* PARTICLES */
+    .particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .particle{position:absolute;border-radius:50%;animation:particleFloat linear infinite;opacity:0;}
+    @keyframes particleFloat{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:.8;}90%{opacity:.3;}100%{transform:translateY(-20px) scale(1.5);opacity:0;}}
+
+    /* MESH BG */
+    .mesh-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 0% 0%,rgba(255,45,135,.12) 0%,transparent 45%),radial-gradient(ellipse at 100% 0%,rgba(255,107,0,.1) 0%,transparent 45%),radial-gradient(ellipse at 50% 100%,rgba(255,170,0,.1) 0%,transparent 45%);animation:meshShift 8s ease-in-out infinite alternate;}
+    @keyframes meshShift{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(20deg);}}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;gap:1rem;padding:.8rem 2rem;margin:6px;border-radius:16px;background:rgba(255,248,252,.92);backdrop-filter:blur(20px);border:2px solid transparent;background-clip:padding-box;box-shadow:0 4px 30px rgba(255,45,135,.12);}
+    nav::before{content:'';position:absolute;inset:-2px;border-radius:18px;z-index:-1;background:linear-gradient(135deg,var(--pink),var(--orange),var(--gold),var(--pink));background-size:300% 300%;animation:gradShift 4s ease infinite;}
+    @keyframes gradShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+    .nav-logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;flex-shrink:0;}
+    .nav-logo img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(255,45,135,.4));}
+    .nav-logo-text{font-family:'Lilita One',cursive;font-size:1.1rem;background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .back-btn{display:flex;align-items:center;gap:.4rem;background:rgba(255,45,135,.08);border:1.5px solid var(--border);border-radius:10px;padding:.4rem .9rem;color:var(--hot);font-size:.78rem;font-weight:700;text-decoration:none;transition:all .2s;margin-left:auto;}
+    .back-btn:hover{background:rgba(255,45,135,.15);transform:translateX(-2px);}
+    @media(max-width:600px){nav{padding:.65rem 1rem;margin:4px;}.nav-logo-text{display:none;}}
+
+    /* MAIN */
+    .main{max-width:1050px;margin:0 auto;padding:6rem 1.5rem 5rem;position:relative;z-index:1;}
+
+    /* PRODUCT HERO */
+    .product-hero{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:3.5rem;}
+    @media(max-width:768px){.product-hero{grid-template-columns:1fr;gap:2rem;}}
+
+    /* IMAGE */
+    .product-img-wrap{position:relative;border-radius:28px;overflow:hidden;border:4px solid transparent;background-clip:padding-box;}
+    .product-img-wrap::after{content:'';position:absolute;inset:-4px;border-radius:32px;z-index:-1;background:linear-gradient(135deg,var(--pink),var(--orange),var(--gold),var(--pink));background-size:300% 300%;animation:gradShift 4s ease infinite;}
+    .product-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:24px;}
+    .product-img-placeholder{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#ffe0f0,#fff5e0,#ffe8cc);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;border-radius:24px;}
+    .product-img-placeholder span{font-size:4rem;}
+
+    /* INFO */
+    .product-info{display:flex;flex-direction:column;gap:1.1rem;}
+    .product-badge{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,rgba(255,45,135,.12),rgba(255,107,0,.1));border:1.5px solid rgba(255,45,135,.25);border-radius:99px;padding:.32rem 1rem;font-size:.65rem;font-weight:700;color:var(--hot);letter-spacing:.1em;text-transform:uppercase;width:fit-content;animation:badgePulse 2s ease-in-out infinite;}
+    @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,45,135,.3);}50%{box-shadow:0 0 0 8px rgba(255,45,135,0);}}
+    .product-title{font-family:'Lilita One',cursive;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .product-short-desc{font-size:.9rem;color:var(--muted);line-height:1.8;font-weight:500;}
+
+    /* PRICE */
+    .price-display{font-family:'Lilita One',cursive;font-size:2.4rem;background:linear-gradient(135deg,var(--hot),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;min-height:2.8rem;}
+    .price-placeholder{font-size:.85rem;color:var(--muted);font-weight:600;font-style:italic;padding:.5rem 0;}
+
+    /* VARIANTS */
+    .variants-label{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.55rem;}
+    .variants-grid{display:flex;flex-direction:column;gap:.5rem;}
+    .variant-btn{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.75rem 1.1rem;border-radius:13px;
+      border:2px solid var(--border);background:#fff;cursor:pointer;
+      font-family:'Poppins',sans-serif;font-weight:600;font-size:.85rem;
+      color:var(--muted);transition:all .2s;text-align:left;width:100%;
+    }
+    .variant-btn:hover{border-color:var(--pink);color:var(--hot);background:rgba(255,45,135,.04);}
+    .variant-btn.active{border-color:var(--hot);background:linear-gradient(135deg,rgba(255,0,102,.07),rgba(255,107,0,.05));color:var(--hot);box-shadow:0 4px 14px rgba(255,45,135,.14);}
+    .variant-btn .v-name{font-weight:700;}
+    .variant-btn .v-price{font-family:'Lilita One',cursive;font-size:1.05rem;background:linear-gradient(135deg,var(--hot),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .variant-btn.active .v-check{display:inline;}
+    .v-check{display:none;color:var(--hot);font-size:.9rem;margin-right:.3rem;}
+
+    /* SELECT HINT */
+    .select-hint{font-size:.75rem;color:var(--muted);font-style:italic;font-weight:600;padding:.4rem 0;}
+
+    /* BUY NOW */
+    .buy-now-btn{
+      display:flex;align-items:center;justify-content:center;gap:.6rem;
+      background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));
+      background-size:200%;animation:gradShift 3s ease infinite;
+      color:#fff;font-family:'Nunito',sans-serif;font-weight:900;
+      font-size:1.05rem;padding:.95rem 2rem;border-radius:14px;
+      border:none;cursor:pointer;text-decoration:none;
+      box-shadow:0 6px 24px rgba(255,45,135,.35);
+      transition:transform .2s,box-shadow .2s,opacity .2s;
+      width:100%;
+    }
+    .buy-now-btn:hover:not(.disabled){transform:translateY(-3px);box-shadow:0 12px 32px rgba(255,107,0,.45);animation:none;}
+    .buy-now-btn.disabled{background:linear-gradient(135deg,#ccc,#bbb);animation:none;opacity:.5;cursor:not-allowed;box-shadow:none;}
+
+    /* SHARE BTN */
+    .share-row{display:flex;gap:.75rem;flex-wrap:wrap;}
+    .share-toggle-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;background:#fff;border:2px solid var(--border);border-radius:14px;padding:.75rem 1.3rem;font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;color:var(--hot);cursor:pointer;transition:all .2s;flex-shrink:0;}
+    .share-toggle-btn:hover{border-color:var(--pink);background:rgba(255,45,135,.05);}
+
+    /* SHARE PANEL */
+    .share-panel{background:#fff;border-radius:16px;padding:1.2rem;border:2px solid rgba(255,45,135,.2);box-shadow:0 8px 32px rgba(255,45,135,.12);display:none;}
+    .share-panel.open{display:block;animation:fadeDown .25s cubic-bezier(.16,1,.3,1);}
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+    .share-panel-title{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.7rem;}
+    .share-link-row{display:flex;align-items:center;gap:.5rem;background:rgba(255,45,135,.05);border:1.5px solid var(--border);border-radius:10px;padding:.5rem .75rem;margin-bottom:.8rem;}
+    .share-link-url{font-size:.72rem;color:var(--hot);font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .copy-btn{font-size:.7rem;font-weight:800;background:linear-gradient(135deg,var(--hot),var(--orange));color:#fff;border:none;border-radius:8px;padding:.3rem .75rem;cursor:pointer;flex-shrink:0;transition:transform .15s;}
+    .copy-btn:hover{transform:scale(1.05);}
+    .share-icons{display:flex;gap:.6rem;}
+    .share-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s;}
+    .share-icon:hover{transform:translateY(-3px) scale(1.1);}
+    .share-icon.fb{background:linear-gradient(135deg,#1877f2,#0a5bc4);}
+    .share-icon.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
+    .share-icon.yt{background:linear-gradient(135deg,#ff0000,#cc0000);}
+    .share-icon.tt{background:linear-gradient(135deg,#010101,#2d2d2d);}
+    .share-icon svg{width:20px;height:20px;fill:white;}
+
+    /* MINI BENEFITS */
+    .mini-benefits{display:flex;flex-wrap:wrap;gap:.6rem;}
+    .mini-benefit{display:flex;align-items:center;gap:.4rem;background:rgba(255,45,135,.06);border:1.5px solid rgba(255,45,135,.15);border-radius:10px;padding:.45rem .85rem;font-size:.75rem;font-weight:600;color:var(--text);}
+
+    /* FULL DESC */
+    .full-desc-section{margin-bottom:3rem;}
+    .section-title{font-family:'Lilita One',cursive;font-size:1.5rem;background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;}
+    .full-desc-box{background:#fff;border-radius:20px;padding:1.8rem;border:2px solid transparent;position:relative;line-height:1.9;font-size:.9rem;color:var(--muted);font-weight:500;}
+    .full-desc-box::before{content:'';position:absolute;inset:-2px;border-radius:22px;z-index:-1;background:linear-gradient(135deg,var(--pink),var(--orange),var(--gold));opacity:.22;}
+
+    /* RECOMMENDED */
+    .rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.4rem;margin-top:1.2rem;}
+    .rec-card{background:#fff;border-radius:18px;overflow:hidden;border:3px solid transparent;background-clip:padding-box;position:relative;cursor:pointer;transition:transform .3s,box-shadow .3s;animation:cardReveal .5s cubic-bezier(.16,1,.3,1) both;}
+    .rec-card::after{content:'';position:absolute;inset:-3px;border-radius:21px;z-index:-1;background:linear-gradient(135deg,var(--pink),var(--orange),var(--gold),var(--pink));background-size:300% 300%;animation:gradShift 4s ease infinite;}
+    @keyframes cardReveal{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+    .rec-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(255,45,135,.18);}
+    .rec-img{width:100%;height:150px;object-fit:cover;display:block;}
+    .rec-img-placeholder{width:100%;height:150px;background:linear-gradient(135deg,#ffe0f0,#fff5e0);display:flex;align-items:center;justify-content:center;font-size:2.5rem;}
+    .rec-body{padding:.9rem;}
+    .rec-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:.88rem;color:var(--text);margin-bottom:.2rem;}
+    .rec-price{font-family:'Lilita One',cursive;font-size:1rem;background:linear-gradient(135deg,var(--hot),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .rec-view-btn{display:block;text-align:center;margin-top:.6rem;background:linear-gradient(135deg,var(--hot),var(--orange));color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:.75rem;padding:.45rem;border-radius:8px;text-decoration:none;}
+    .rec-view-btn:hover{opacity:.85;}
+
+    /* FOOTER */
+    footer{position:relative;z-index:1;text-align:center;padding:2.5rem 2rem;background:linear-gradient(135deg,var(--hot),var(--orange),var(--gold));margin:0 8px 8px;border-radius:24px 24px 0 0;}
+    footer p{font-size:.72rem;color:#fff;opacity:.85;font-weight:500;}
+
+    /* LOADING */
+    .loading-wrap{text-align:center;padding:6rem 2rem;}
+    .loading-dots{display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem;}
+    .loading-dots span{width:12px;height:12px;border-radius:50%;animation:bounceDot 1.2s infinite ease-in-out;}
+    .loading-dots span:nth-child(1){background:var(--pink);animation-delay:0s;}
+    .loading-dots span:nth-child(2){background:var(--orange);animation-delay:.15s;}
+    .loading-dots span:nth-child(3){background:var(--gold);animation-delay:.3s;}
+    @keyframes bounceDot{0%,100%{transform:translateY(0) scale(.8);opacity:.4;}50%{transform:translateY(-12px) scale(1.1);opacity:1;}}
+    .loading-wrap p{font-size:.85rem;color:var(--muted);}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);z-index:9999;background:var(--text);color:#fff;font-size:.8rem;font-weight:700;padding:.65rem 1.4rem;border-radius:99px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  </style>
+</head>
+<body>
+<div class="particles" id="particles"></div>
+<div class="mesh-bg"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html" aria-label="GlowCore Booster Home">
+    <img src="images/glowcorebooster.webp" alt="GlowCore" onerror="this.style.display='none'"/>
+    <span class="nav-logo-text">GlowCore Booster</span>
+  </a>
+  <a class="back-btn" href="index.html" aria-label="Back to Store">← Back to Store</a>
+</nav>
+
+<main>
+<div class="main" id="mainContent">
+  <div class="loading-wrap">
+    <div class="loading-dots"><span></span><span></span><span></span></div>
+    <p>Loading product…</p>
+  </div>
+</div>
+
+</main>
+<footer><p>&copy; 2026 GlowCore Booster · Made in the United States</p></footer>
+<div id="toast">✅ Link copied!</div>
+
+<script>
+  /* PARTICLES */
+  (function(){
+    const c=document.getElementById('particles');
+    const cols=['#ff2d87','#ff6b00','#ffaa00','#ffe033','#ff9ec4'];
+    for(let i=0;i<18;i++){
+      const p=document.createElement('div');p.className='particle';
+      p.style.cssText=`left:${Math.random()*100}%;width:${4+Math.random()*5}px;height:${4+Math.random()*5}px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s;`;
+      c.appendChild(p);
+    }
+  })();
+
+  const SITE_URL=(()=>{const p=window.location.pathname.split('/').filter(Boolean);const base=p.length>0?p.slice(0,-1).join('/'):'' ;return window.location.origin+(base?'/'+base:'');})();
+  const params=new URLSearchParams(window.location.search);
+
+  function makeSlug(t){return(t||'product').toLowerCase().replace(/[^a-z0-9]/g,'').substring(0,10);}
+  function fixImg(url){if(!url)return'';if(url.startsWith('http'))return url;return url.replace(/^\//,'');}
+  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  const pathParts=window.location.pathname.split('/').filter(Boolean);
+  const urlSlug=(pathParts[0]==='p'&&pathParts[1])?pathParts[1]:(params.get('slug')||'');
+  const productId=params.get('id')||'';
+  let allProducts=[], currentProduct=null, selectedVariantIdx=-1;
+
+  function showToast(){
+    const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);
+  }
+  function copyLink(url){
+    navigator.clipboard.writeText(url).then(showToast).catch(()=>{
+      const ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast();
+    });
+  }
+
+  function toggleShare(){
+    document.getElementById('sharePanel').classList.toggle('open');
+  }
+
+  /* SELECT VARIANT */
+  function selectVariant(idx){
+    selectedVariantIdx=idx;
+    const v=currentProduct.variants[idx];
+    /* update buttons */
+    document.querySelectorAll('.variant-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+    /* update price */
+    const priceEl=document.getElementById('priceDisplay');
+    if(priceEl) priceEl.textContent=v.price;
+    /* enable buy button */
+    const buyBtn=document.getElementById('buyNowBtn');
+    if(buyBtn){
+      buyBtn.classList.remove('disabled');
+      buyBtn.removeAttribute('disabled');
+      buyBtn.href='checkout-page.html?link='+encodeURIComponent(v.checkoutLink);
+    }
+    /* hide hint */
+    const hint=document.getElementById('selectHint');
+    if(hint) hint.style.display='none';
+  }
+
+  async function init(){
+    try{
+      const res=await fetch('products.json?t='+Date.now());
+      allProducts=await res.json();
+    }catch(e){allProducts=[];}
+
+    if(urlSlug){
+      currentProduct=allProducts.find(p=>p.published&&makeSlug(p.title)===urlSlug)||null;
+    } else {
+      currentProduct=allProducts.find(p=>p.id===productId)||null;
+    }
+    if(!currentProduct){
+      document.getElementById('mainContent').innerHTML=`<div class="loading-wrap"><div class="loading-dots"><span></span><span></span><span></span></div><p>Product not found. <a href="index.html" style="color:var(--hot);font-weight:700;">Go back</a></p></div>`;
+      return;
+    }
+
+    document.title=`${currentProduct.title} — GlowCore Booster ✨`;
+    const shareUrl=window.location.href;
+    const fbShare=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+    const variants=currentProduct.variants||[];
+
+    /* RECOMMENDED */
+    const recIds=currentProduct.recommended||[];
+    // If recommended list is empty, show all other published products
+    const recProducts=recIds.length
+      ? allProducts.filter(p=>recIds.includes(p.id)&&p.published)
+      : allProducts.filter(p=>p.id!==currentProduct.id&&p.published).slice(0,6);
+    let recHtml='';
+    if(recProducts.length){
+      recHtml=`
+        <div class="full-desc-section">
+          <div class="section-title">💖 You Might Also Like</div>
+          <div class="rec-grid">
+            ${recProducts.map((r,i)=>`
+              <div class="rec-card" style="animation-delay:${i*.1}s" onclick="window.location='product.html?id=${r.id}'">
+                ${r.imageUrl?`<img class="rec-img" src="${fixImg(r.imageUrl)}" alt="${esc(r.title||'')}" onerror="this.parentElement.innerHTML='<div class=rec-img-placeholder>✨</div>'">`:`<div class="rec-img-placeholder">✨</div>`}
+                <div class="rec-body">
+                  <div class="rec-title">${esc(r.title||'')}</div>
+                  <div class="rec-price">${esc((r.variants&&r.variants[0]&&r.variants[0].price)||'')}</div>
+                  <a class="rec-view-btn" href="product.html?id=${r.id}" onclick="event.stopPropagation()">View Product →</a>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>`;
+    }
+
+    document.getElementById('mainContent').innerHTML=`
+      <div class="product-hero">
+        <!-- IMAGE -->
+        <div class="product-img-wrap">
+          ${currentProduct.imageUrl
+            ?`<img class="product-img" src="${fixImg(currentProduct.imageUrl)}" alt="${esc(currentProduct.title||'')}" onerror="this.parentElement.innerHTML='<div class=product-img-placeholder><span>✨</span></div>'">`
+            :`<div class="product-img-placeholder"><span>✨</span></div>`}
+        </div>
+
+        <!-- INFO -->
+        <div class="product-info">
+          <div class="product-badge">✨ Best Seller</div>
+          <h1 class="product-title">${esc(currentProduct.title||'')}</h1>
+          <p class="product-short-desc">${esc(currentProduct.description||'')}</p>
+
+          <!-- PRICE — updates on variant select -->
+          <div id="priceDisplay" class="price-display" style="${variants.length?'display:none':''}">${variants.length?'':''}</div>
+          ${variants.length?`<div class="price-placeholder" id="pricePlaceholder">Select a package to see price</div>`:''}
+
+          <!-- VARIANTS -->
+          ${variants.length?`
+            <div>
+              <div class="variants-label">Choose Your Package</div>
+              <div class="variants-grid">
+                ${variants.map((v,i)=>`
+                  <button class="variant-btn" onclick="selectVariant(${i})">
+                    <span><span class="v-check">✔ </span><span class="v-name">${esc(v.name)}</span></span>
+                    <span class="v-price">${esc(v.price)}</span>
+                  </button>`).join('')}
+              </div>
+              <div class="select-hint" id="selectHint">👆 Select a package to continue</div>
+            </div>
+          `:''}
+
+          <!-- BUY NOW — disabled until variant selected -->
+          <a id="buyNowBtn"
+             class="buy-now-btn disabled"
+             href="#"
+             onclick="if(this.classList.contains('disabled')){event.preventDefault();return;}"
+          >🛒 Buy Now</a>
+
+          <!-- SHARE -->
+          <div class="share-row">
+            <button class="share-toggle-btn" onclick="toggleShare()">🔗 Share Product</button>
+          </div>
+          <div class="share-panel" id="sharePanel">
+            <div class="share-panel-title">Share this product</div>
+            <div class="share-link-row">
+              <span class="share-link-url" id="shareLinkDisplay"></span>
+              <button class="copy-btn" onclick="copyLink(window.location.href)">Copy</button>
+            </div>
+            <div class="share-icons">
+              <a class="share-icon fb" href="${fbShare}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a class="share-icon ig" href="https://instagram.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></a>
+              <a class="share-icon yt" href="https://youtube.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#ff0000"/></svg></a>
+              <a class="share-icon tt" href="https://tiktok.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l-.04-8.33a8.27 8.27 0 0 0 4.84 1.55V4.98a4.85 4.85 0 0 1-1.03-.29z"/></svg></a>
+            </div>
+          </div>
+
+          <!-- MINI BENEFITS -->
+          <div class="mini-benefits">
+            <div class="mini-benefit">🌿 100% Natural</div>
+            <div class="mini-benefit">🛡️ 30-Day Guarantee</div>
+            <div class="mini-benefit">🚀 Fast Shipping</div>
+            <div class="mini-benefit">✨ Results in 2 weeks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FULL DESCRIPTION -->
+      <div class="full-desc-section">
+        <div class="section-title">📋 Product Details</div>
+        <div class="full-desc-box">${esc(currentProduct.fullDescription||currentProduct.description||'')}</div>
+      </div>
+
+      <!-- RECOMMENDED -->
+      ${recHtml}
+    `;
+
+    /* populate share link display with current page URL */
+    const sld=document.getElementById('shareLinkDisplay');
+    if(sld) sld.textContent=window.location.href;
+
+    /* show price display area properly after render */
+    const pd=document.getElementById('priceDisplay');
+    if(pd) pd.style.display='none';
+
+    /* Auto-select first variant so Buy Now is immediately clickable */
+    if(variants.length) selectVariant(0);
+  }
+
+  /* wire up selectVariant to also show price display */
+  const _origSelectVariant=selectVariant;
+
+  init();
+</script>
+</body>
+</html>
+
