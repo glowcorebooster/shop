@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Checkout — IncomeEdge Academy</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --pink:#2563eb;--hot:#3b82f6;--orange:#f97316;
+      --gold:#10b981;--yellow:#34d399;
+      --bg:#0a0f1e;--white:#f8fafc;
+      --text:#f8fafc;--muted:#94a3b8;
+      --border:rgba(37,99,235,0.25);
+    }
+    html,body{height:100%;}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;}
+
+    /* ANIMATED BORDER FRAME */
+    body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;border:4px solid transparent;border-image:linear-gradient(var(--angle,0deg),#2563eb,#10b981,#f97316,#3b82f6,#10b981,#2563eb) 1;}
+    
+    
+
+    /* MESH BG */
+    .mesh-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 0% 0%,rgba(37,99,235,.15) 0%,transparent 45%),radial-gradient(ellipse at 100% 0%,rgba(16,185,129,.1) 0%,transparent 45%),radial-gradient(ellipse at 50% 100%,rgba(249,115,22,.08) 0%,transparent 45%);}
+
+    /* NAV */
+    nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.5rem;margin:6px 6px 0;border-radius:16px;background:rgba(10,15,30,.93);backdrop-filter:blur(20px);border:2px solid transparent;background-clip:padding-box;box-shadow:0 4px 30px rgba(37,99,235,.15);}
+    nav::before{content:'';position:absolute;inset:-2px;border-radius:18px;z-index:-1;background:#10b981;}
+    
+
+    .logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;}
+    .logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#f8fafc;white-space:nowrap;}
+    .back-link{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.82rem;text-decoration:none;transition:color .2s;font-weight:600;}
+    .back-link:hover{color:#3b82f6;}
+
+    /* HAMBURGER */
+    .hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:rgba(37,99,235,.1);border:1.5px solid rgba(37,99,235,.3);border-radius:10px;cursor:pointer;padding:8px;transition:all .2s;flex-shrink:0;}
+    .hamburger:hover{background:rgba(37,99,235,.2);border-color:#3b82f6;}
+    .hamburger span{display:block;height:2px;background:#3b82f6;border-radius:2px;transition:all .3s;}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+    .nav-menu{position:absolute;top:calc(100% + 10px);left:0;background:rgba(10,15,30,.97);backdrop-filter:blur(20px);border-radius:16px;border:2px solid rgba(37,99,235,.25);box-shadow:0 12px 40px rgba(37,99,235,.2);padding:.75rem;min-width:180px;z-index:999;opacity:0;transform:translateY(-8px) scale(.97);pointer-events:none;transition:all .22s cubic-bezier(.16,1,.3,1);}
+    .nav-menu.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
+    .nav-menu a{display:flex;align-items:center;gap:.6rem;padding:.65rem .9rem;border-radius:10px;text-decoration:none;color:var(--text);font-size:.88rem;font-weight:600;transition:all .18s;}
+    .nav-menu a:hover{background:rgba(37,99,235,.12);color:#3b82f6;}
+    .nav-menu a .menu-icon{font-size:1rem;width:22px;text-align:center;}
+
+    /* CHECKOUT BAR */
+    .checkout-bar{position:relative;z-index:5;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin:0 6px;background:rgba(10,15,30,.7);border-left:2px solid rgba(37,99,235,.25);border-right:2px solid rgba(37,99,235,.25);border-bottom:1px solid rgba(37,99,235,.2);backdrop-filter:blur(16px);}
+    .checkout-bar h1{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;background:linear-gradient(135deg,#3b82f6,#10b981,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .checkout-bar p{font-size:.75rem;color:var(--muted);margin-top:.15rem;font-weight:600;}
+
+    .trust-badges{display:flex;gap:.75rem;flex-wrap:wrap;}
+    .badge{display:flex;align-items:center;gap:.35rem;font-size:.73rem;font-weight:700;padding:.35rem .85rem;border-radius:99px;background:rgba(37,99,235,.08);border:1.5px solid rgba(37,99,235,.25);color:#3b82f6;}
+
+    /* IFRAME */
+    .iframe-wrap{flex:1;position:relative;min-height:calc(100vh - 180px);margin:0 6px;z-index:1;}
+    .loader{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:var(--bg);z-index:1;transition:opacity .4s;}
+    .loader.gone{opacity:0;pointer-events:none;}
+    .spinner{width:50px;height:50px;border-radius:50%;background:conic-gradient(#2563eb,#10b981,#f97316,#3b82f6,#2563eb);animation:spin .9s linear infinite;-webkit-mask:radial-gradient(circle,transparent 55%,black 56%);}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loader p{font-size:.82rem;color:var(--muted);font-weight:600;}
+
+    .fallback{display:none;margin:1.5rem;background:rgba(249,115,22,.06);border:1.5px solid rgba(249,115,22,.2);border-radius:14px;padding:1.1rem 1.4rem;font-size:.85rem;color:var(--muted);align-items:center;gap:1rem;font-weight:600;}
+    .fallback.show{display:flex;}
+    .fallback a{color:#f97316;font-weight:700;}
+
+    iframe.checkout-frame{width:100%;height:100%;min-height:calc(100vh - 180px);border:none;display:block;}
+
+    /* FOOTER — same as index.html */
+    footer{position:relative;z-index:1;text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,#1a2540,#0f2027,#111827);margin:0 8px 8px;border-radius:24px 24px 0 0;border-top:1px solid rgba(37,99,235,.2);}
+    .footer-logo{font-family:'Syne',sans-serif;font-size:1.5rem;color:#fff;margin-bottom:.5rem;font-weight:800;background:linear-gradient(135deg,#3b82f6,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .footer-socials{display:flex;align-items:center;justify-content:center;gap:.75rem;margin:1rem 0;}
+    .footer-social{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);text-decoration:none;transition:all .2s;}
+    .footer-social:hover{background:rgba(255,255,255,.18);transform:translateY(-3px);}
+    footer p{font-size:.72rem;opacity:.6;font-weight:500;color:#fff;}
+
+    @media(max-width:600px){.trust-badges{display:none;}nav,.checkout-bar{padding:1rem 1.2rem;}}
+  </style>
+</head>
+<body>
+<div class="mesh-bg"></div>
+
+<nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-menu" id="navMenu">
+    <a href="index.html"><span class="menu-icon">🏠</span> Home</a>
+    <a href="shop.html"><span class="menu-icon">🛍️</span> Shop</a>
+  </div>
+  <a class="logo" href="index.html">
+    <span class="logo-text">⚡ IncomeEdge™ Academy</span>
+  </a>
+</nav>
+
+<div class="checkout-bar">
+  <div>
+    <h1>🔒 Secure Checkout</h1>
+    <p>Powered by Digistore24 — encrypted &amp; safe</p>
+  </div>
+  <div class="trust-badges">
+    <div class="badge">🔒 SSL Secured</div>
+    <div class="badge">💳 Safe Payment</div>
+    <div class="badge">✅ 30-Day Guarantee</div>
+  </div>
+</div>
+
+<div class="fallback" id="fallback">
+  ⚠️ Checkout could not load here.
+  <a id="fallbackLink" href="#" target="_blank" rel="noopener">Open checkout page →</a>
+</div>
+
+<div class="iframe-wrap">
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <p>Loading secure checkout…</p>
+  </div>
+  <iframe class="checkout-frame" id="frame" title="Secure Checkout" allow="payment"></iframe>
+</div>
+
+<footer>
+  <div class="footer-logo">⚡ IncomeEdge™ Academy ⚡</div>
+  <div class="footer-socials">
+    <a class="footer-social" href="https://facebook.com/glowcorebooster" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+    <a class="footer-social" href="https://instagram.com/glowcorebooster" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/></svg></a>
+    <a class="footer-social" href="https://youtube.com/@glowcorebooster" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#ff0000"/></svg></a>
+    <a class="footer-social" href="https://tiktok.com/@glowcorebooster" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l-.04-8.33a8.27 8.27 0 0 0 4.84 1.55V4.98a4.85 4.85 0 0 1-1.03-.29z"/></svg></a>
+  </div>
+  <p>&copy; 2026 IncomeEdge Academy · All rights reserved · Made in the United States</p>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger=document.getElementById('hamburger');
+  const navMenu=document.getElementById('navMenu');
+  hamburger.addEventListener('click',()=>{
+    hamburger.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+  document.addEventListener('click',(e)=>{
+    if(!hamburger.contains(e.target)&&!navMenu.contains(e.target)){
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+    }
+  });
+</script>
+<script>
+  const params=new URLSearchParams(window.location.search);
+  const link=params.get('link')||'';
+  const frame=document.getElementById('frame');
+  const loader=document.getElementById('loader');
+  const fallback=document.getElementById('fallback');
+  const fbLink=document.getElementById('fallbackLink');
+  if(!link){loader.classList.add('gone');fallback.classList.add('show');fbLink.textContent='Go back to store';fbLink.href='index.html';}
+  else{
+    fbLink.href=link;frame.src=link;
+    frame.addEventListener('load',()=>loader.classList.add('gone'));
+    frame.addEventListener('error',()=>{loader.classList.add('gone');fallback.classList.add('show');});
+    setTimeout(()=>loader.classList.add('gone'),9000);
+  }
+</script>
+
+<script>
+/* Global lazy-load observer for all static <img> tags */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const img = e.target;
+        if(img.dataset.src){ img.src = img.dataset.src; delete img.dataset.src; }
+        img.setAttribute('loading','lazy');
+        img.setAttribute('decoding','async');
+        obs.unobserve(img);
+      }
+    });
+  },{rootMargin:'300px 0px'});
+  document.querySelectorAll('img:not([data-lazy-skip])').forEach(img => obs.observe(img));
+})();
+</script>
+</body>
+</html>
