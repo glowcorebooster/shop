@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /products.json
 
-Sitemap: https://www.glowcorebooster.com/sitemap.xml
+Sitemap: https://www.incomeedge.shop/sitemap.xml
