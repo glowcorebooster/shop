@@ -1,5 +1,31 @@
 [
   {
+    "id": "millionair_mq4uqnpn",
+    "title": "Millionaire Partner System: Exclusive Member Area & Video Courses",
+    "description": "Access the Millionaire Partner System member area for exclusive video courses and resources. Learn proven strategies for online entrepreneurship, affiliate marketing, and passive income generation. Transform your financial future with expert guidance and actionable insights.",
+    "fullDescription": "Unlock your potential with the Millionaire Partner System, an exclusive member area designed to guide you toward financial independence. This comprehensive platform offers a rich collection of video courses and resources, meticulously crafted to demystify the world of online entrepreneurship and affiliate marketing. Discover proven strategies for generating passive income, building a robust online business, and scaling your success. Our expertly curated content covers everything from foundational principles to advanced tactics, ensuring you gain the knowledge and skills needed to thrive. Whether you're a beginner seeking to launch your first venture or an experienced marketer aiming to optimize your results, the Millionaire Partner System provides actionable insights and step-by-step guidance. Access a supportive community, learn from industry leaders, and transform your financial future. This system is your gateway to mastering digital marketing strategies and achieving your wealth-building goals.",
+    "imageUrl": "/images/Millionaire-Partner-System.webp",
+    "published": true,
+    "variants": [
+      {
+        "name": "Full Payment",
+        "price": "$1,997.00",
+        "checkoutLink": "https://www.digistore24.com/product/569406?cid=cmc2227203585"
+      },
+      {
+        "name": "SPLIT PAY",
+        "price": "$797.00",
+        "checkoutLink": "https://www.digistore24.com/product/569410?cid=cmc2227203585"
+      }
+    ],
+    "recommended": [
+      "masteraivi_mq4gm76a",
+      "superlaunc_mq4g0ss3"
+    ],
+    "createdAt": "2026-06-08T06:50:47.807Z",
+    "updatedAt": "2026-06-08T06:50:47.807Z"
+  },
+  {
     "id": "masteraivi_mq4gm76a",
     "title": "Master AI Video Creation & Boost Your Business",
     "description": "RocketClips AI Elite offers a comprehensive member area and video course to master AI video creation. Learn to produce high-quality, engaging videos efficiently, boost your online presence, and transform your digital marketing with cutting-edge AI tools and expert guidance.",
