@@ -47,7 +47,15 @@ Disallow: /
 User-agent: CloudflareBrowserRenderingCrawler
 Disallow: /
 
+# Google: block AI bot, allow regular search (Googlebot)
 User-agent: Google-Extended
+Disallow: /
+
+# Bing/Microsoft: block AI bots, allow regular search (Bingbot)
+User-agent: adidxbot
+Disallow: /
+
+User-agent: MicrosoftPreview
 Disallow: /
 
 User-agent: GPTBot
@@ -56,7 +64,4 @@ Disallow: /
 User-agent: meta-externalagent
 Disallow: /
 
-Sitemap: https://www.incomeedge.shop/sitemap.xml
-
 # END Cloudflare Managed Content
-
