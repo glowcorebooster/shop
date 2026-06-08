@@ -1,7 +1,3 @@
-User-agent: *
-Allow: /
-Disallow: /admin.html
-Disallow: /products.json
 # As a condition of accessing this website, you agree to abide by the following
 # content signals:
 
@@ -62,6 +58,3 @@ Disallow: /
 
 # END Cloudflare Managed Content
 
-
-
-Sitemap: https://www.incomeedge.shop/sitemap.xml
