@@ -1,5 +1,26 @@
 [
   {
+    "id": "superlaunc_mq4g0ss3",
+    "title": "Super Launch System: Master Digital Product Launches & Online Courses",
+    "description": "The Super Launch System is your ultimate guide to mastering digital product and online course launches. Gain access to a comprehensive member area and video courses designed to help you confidently launch, attract customers, and maximize sales.",
+    "fullDescription": "Unlock the secrets to successful digital product and online course launches with the Super Launch System. This comprehensive member area and video course series provides you with the essential strategies and tools to confidently bring your creations to market. Learn how to craft compelling offers, build an engaged audience, and execute high-converting launch campaigns. Whether you're a seasoned entrepreneur or just starting, our expert-led modules will guide you through every step, from pre-launch planning to post-launch optimization. Discover proven techniques for maximizing sales, attracting ideal customers, and establishing a strong online presence. Transform your launch process and achieve the financial freedom you desire with the Super Launch System.",
+    "imageUrl": "/images/super-launch-system-box.webp",
+    "published": true,
+    "variants": [
+      {
+        "name": "Super Launch",
+        "price": "$12.95",
+        "checkoutLink": "https://www.jvzoo.com/b/108867/395899/2?sku=1676638420"
+      }
+    ],
+    "recommended": [
+      "instagramu_mq4ff18h",
+      "titansedge_mq3gn58t"
+    ],
+    "createdAt": "2026-06-07T23:58:46.703Z",
+    "updatedAt": "2026-06-07T23:58:46.703Z"
+  },
+  {
     "id": "instagramu_mq4ff18h",
     "title": "Instagram University 4.0: Master Instagram to Earn $10,000/Month",
     "description": "Join Instagram University 4.0 to learn how to grow your Instagram from scratch to $10,000/month. Access video courses and a member area with proven strategies for content, growth, and monetization. Achieve financial success and transform your online presence.",
