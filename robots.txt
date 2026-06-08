@@ -25,9 +25,6 @@
 
 # BEGIN Cloudflare Managed content
 
-User-agent: *
-Allow: /
-
 User-agent: Amazonbot
 Disallow: /
 
