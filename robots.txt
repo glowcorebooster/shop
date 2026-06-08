@@ -56,5 +56,7 @@ Disallow: /
 User-agent: meta-externalagent
 Disallow: /
 
+Sitemap: https://www.glowcorebooster.com/sitemap.xml
+
 # END Cloudflare Managed Content
 
