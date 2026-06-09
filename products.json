@@ -1,5 +1,25 @@
 [
   {
+    "id": "thedigital_mq6nsa1t",
+    "title": "The Digital Earning Starter Guide",
+    "description": "The Digital Earning Starter Guide — a beginner-friendly online income blueprint designed to help complete beginners understand how to start making money online using simple, proven digital strategies.",
+    "imageUrl": "images/The Digital Earning Starter.webp",
+    "published": true,
+    "category": "business",
+    "variants": [
+      {
+        "name": "Pro",
+        "price": "$29.99",
+        "affiliateLink": "https://oraclefx.org/beginners-online-income-blueprint#aff=goldenpanel"
+      }
+    ],
+    "recommended": [
+      "affiliatem_mq6nmmqu"
+    ],
+    "createdAt": "2026-06-09T13:11:38.464Z",
+    "updatedAt": "2026-06-09T13:11:38.464Z"
+  },
+  {
     "id": "affiliatem_mq6nmmqu",
     "title": "Affiliate Marketing like a Pro",
     "description": "Start Affiliate Marketing Like a Pro gives beginners a complete, easy-to-follow system for building a profitable affiliate business from scratch.",
