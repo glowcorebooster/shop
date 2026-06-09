@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "thegeniusw_mq69tjg7",
+    "title": "The Genius Wave Downloads",
+    "description": "thegeniuswave has already accepted your request. You can start promoting the product using the link provided in the button above.",
+    "imageUrl": "images/TheGeniusWaveDownloads.webp",
+    "published": true,
+    "category": "business",
+    "variants": [
+      {
+        "name": "One Time Payment",
+        "price": "$49.97",
+        "affiliateLink": "https://ingeniuswave.com/DSvsl/#aff=goldenpanel"
+      }
+    ],
+    "recommended": [],
+    "createdAt": "2026-06-09T06:40:42.672Z",
+    "updatedAt": "2026-06-09T06:40:42.672Z"
+  }
+]
