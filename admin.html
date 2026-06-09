@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin ⚡ IncomeEdge™ Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --pink:#2563eb;--hot:#3b82f6;--orange:#f97316;--gold:#10b981;
+      --bg:#0a0f1e;--s1:#111827;--s2:#141d33;--s3:#1a2540;
+      --success:#22c55e;--danger:#f87171;--warn:#fbbf24;
+      --text:#f8fafc;--muted:#94a3b8;
+      --border:rgba(37,99,235,0.2);--border2:rgba(37,99,235,0.35);
+      --glow:rgba(37,99,235,0.15);
+    }
+    html,body{height:100%;}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;}
+    body::before{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;border:5px solid transparent;border-image:linear-gradient(var(--angle,0deg),#2563eb,#10b981,#f97316,#3b82f6,#10b981,#2563eb) 1;animation:rotateBorder 3s linear infinite;}
+    @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+    @keyframes rotateBorder{to{--angle:360deg;}}
+
+    /* LOGIN */
+    #loginScreen{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;align-items:center;justify-content:center;}
+    .login-box{width:360px;padding:2.5rem;background:var(--s1);border-radius:24px;box-shadow:0 0 60px rgba(37,99,235,.2);animation:popIn .45s cubic-bezier(.16,1,.3,1);position:relative;}
+    .login-box::before{content:'';position:absolute;inset:-2px;border-radius:26px;z-index:-1;background:linear-gradient(135deg,#2563eb,#10b981,#f97316,#2563eb);background-size:300% 300%;animation:gradShift 4s ease infinite;}
+    @keyframes gradShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+    @keyframes popIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+    .login-emoji{font-size:3.5rem;display:block;text-align:center;animation:logoFloat 3s ease-in-out infinite;}
+    @keyframes logoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+    .login-brand{font-family:'Syne',sans-serif;font-size:1.3rem;text-align:center;margin:.4rem 0 .3rem;background:linear-gradient(135deg,#3b82f6,#10b981,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .login-sub{font-size:.75rem;color:var(--muted);margin-bottom:1.8rem;text-align:center;}
+    .lbl{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.35rem;}
+    .inp{width:100%;padding:.8rem 1rem;background:var(--s2);border:2px solid var(--border2);border-radius:12px;color:var(--text);font-size:.9rem;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .2s;margin-bottom:.9rem;}
+    .inp:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 4px var(--glow);}
+    .login-btn{width:100%;padding:.88rem;background:linear-gradient(135deg,#f97316,#ef4444,#f97316);background-size:200%;color:#fff;font-weight:800;font-size:.9rem;border:none;border-radius:12px;cursor:pointer;font-family:'Syne',sans-serif;box-shadow:0 4px 24px rgba(255,45,135,.4);animation:gradShift 3s ease infinite;}
+    .login-btn:hover{transform:translateY(-1px);}
+    .login-err{display:none;color:var(--danger);font-size:.75rem;margin-top:.6rem;text-align:center;}
+    .login-err.show{display:block;}
+    .login-hint{font-size:.7rem;color:var(--muted);margin-top:1rem;text-align:center;}
+    .login-hint code{background:var(--s3);padding:.1rem .35rem;border-radius:4px;}
+
+    /* APP */
+    #app{display:none;flex-direction:column;min-height:100vh;}
+    #app.on{display:flex;}
+
+    /* TOPBAR */
+    .topbar{position:sticky;top:0;z-index:50;height:56px;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(10,15,30,.97);backdrop-filter:blur(16px);border-bottom:2px solid var(--border);gap:1rem;}
+    .tb-left{display:flex;align-items:center;gap:.6rem;flex-shrink:0;}
+    .tb-brand{font-family:'Syne',sans-serif;font-size:1rem;background:linear-gradient(135deg,#3b82f6,#10b981,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .tb-badge{font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3b82f6;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.25);padding:.18rem .5rem;border-radius:99px;}
+    .tb-right{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;}
+    .tb-btn{padding:.38rem .85rem;border-radius:8px;font-size:.72rem;border:1.5px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .15s;white-space:nowrap;}
+    .tb-btn:hover{color:var(--text);border-color:#3b82f6;}
+    .tb-logout{color:var(--danger);border-color:rgba(248,113,113,.25);}
+    .tb-logout:hover{background:rgba(248,113,113,.08);}
+
+    /* LAYOUT */
+    .layout{display:grid;grid-template-columns:390px 1fr;flex:1;min-height:calc(100vh - 56px);}
+    @media(max-width:900px){.layout{grid-template-columns:1fr;}}
+
+    /* SIDEBAR */
+    .sidebar{background:var(--s1);border-right:1px solid var(--border);padding:1.3rem;overflow-y:auto;display:flex;flex-direction:column;gap:.85rem;}
+    .form-title{font-family:'Syne',sans-serif;font-size:1rem;background:linear-gradient(135deg,#3b82f6,#10b981,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .fgroup{display:flex;flex-direction:column;gap:.3rem;}
+    .flabel{font-size:.63rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+    .flabel .req{color:var(--danger);}
+    .finput,.ftextarea,select.finput{padding:.65rem .88rem;background:var(--s2);border:2px solid var(--border2);border-radius:10px;color:var(--text);font-size:.83rem;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .2s;width:100%;}
+    select.finput option{background:var(--s2);color:var(--text);}
+    .finput:focus,.ftextarea:focus,select.finput:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px var(--glow);}
+    .ftextarea{resize:vertical;min-height:72px;line-height:1.6;}
+    .fdivider{border:none;border-top:1px solid var(--border);}
+
+    /* IMAGE */
+    .img-hint{font-size:.63rem;color:var(--muted);font-weight:500;line-height:1.5;}
+    .img-preview{display:none;width:100%;border-radius:10px;aspect-ratio:16/9;object-fit:cover;border:2px solid var(--border2);background:var(--s2);margin-top:.35rem;}
+    .img-preview.show{display:block;}
+    .img-err{display:none;font-size:.68rem;color:var(--danger);margin-top:.3rem;}
+    .img-err.show{display:block;}
+
+    /* VARIANTS */
+    .variants-head{display:flex;align-items:center;justify-content:space-between;}
+    .variants-sublabel{font-size:.63rem;color:var(--muted);font-weight:500;margin:.25rem 0 .6rem;line-height:1.5;}
+    .add-variant-btn{background:rgba(37,99,235,.08);border:1.5px dashed var(--border2);color:#3b82f6;border-radius:8px;padding:.28rem .65rem;font-size:.68rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap;}
+    .add-variant-btn:hover{background:rgba(37,99,235,.16);}
+    .variants-list{display:flex;flex-direction:column;gap:.5rem;}
+    .variant-row{background:var(--s2);border:1.5px solid var(--border2);border-radius:12px;padding:.65rem .8rem;display:flex;flex-direction:column;gap:.4rem;}
+    .variant-row-top{display:flex;align-items:center;justify-content:space-between;}
+    .variant-index{font-size:.58rem;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:.08em;}
+    .remove-variant-btn{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);color:var(--danger);border-radius:7px;width:24px;height:24px;cursor:pointer;font-size:.72rem;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+    .remove-variant-btn:hover{background:rgba(248,113,113,.22);}
+    .variant-fields{display:grid;grid-template-columns:1fr 1fr;gap:.38rem;}
+    .variant-fields .finput{font-size:.76rem;padding:.48rem .6rem;}
+    .variant-link .finput{font-size:.74rem;padding:.48rem .6rem;}
+    .vfield-label{font-size:.58rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.22rem;}
+
+    /* PUBLISH */
+    .publish-row{display:flex;align-items:center;gap:.75rem;padding:.55rem .8rem;background:var(--s2);border-radius:10px;border:1.5px solid var(--border2);cursor:pointer;}
+    .publish-row input{width:17px;height:17px;accent-color:var(--pink);cursor:pointer;}
+    .publish-row label{font-size:.82rem;font-weight:600;cursor:pointer;color:var(--text);}
+
+    /* FORM BUTTONS */
+    .save-btn{padding:.82rem;border-radius:12px;background:linear-gradient(135deg,#f97316,#ef4444,#f97316);background-size:200%;color:#fff;font-weight:800;font-size:.88rem;border:none;cursor:pointer;font-family:'Syne',sans-serif;box-shadow:0 4px 20px rgba(255,45,135,.35);transition:all .2s;animation:gradShift 3s ease infinite;display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;}
+    .save-btn:hover{transform:translateY(-1px);}
+    .reset-btn{width:100%;padding:.58rem;border-radius:10px;background:transparent;border:1.5px solid var(--border2);color:var(--muted);font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .2s;}
+    .reset-btn:hover{border-color:var(--pink);color:var(--pink);}
+
+    /* ══ JSON PANEL ══ */
+    .main-panel{background:var(--bg);padding:1.3rem;overflow-y:auto;display:flex;flex-direction:column;gap:1.1rem;}
+    .panel-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;}
+    .panel-title{font-family:'Syne',sans-serif;font-size:1rem;background:linear-gradient(135deg,#3b82f6,#10b981,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .panel-meta{font-size:.68rem;color:var(--muted);font-weight:500;}
+    .filter-row{display:flex;gap:.38rem;}
+    .filter-btn{padding:.28rem .75rem;border-radius:8px;font-size:.68rem;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .15s;}
+    .filter-btn.active,.filter-btn:hover{background:rgba(37,99,235,.1);border-color:#2563eb;color:#3b82f6;}
+
+    /* JSON EXPORT BOX */
+    .json-export-box{background:var(--s1);border-radius:18px;border:2px solid var(--border2);overflow:hidden;}
+    .json-export-header{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.2rem;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:.5rem;}
+    .json-export-title{font-family:'Syne',sans-serif;font-weight:900;font-size:.9rem;color:var(--text);display:flex;align-items:center;gap:.5rem;}
+    .json-export-actions{display:flex;gap:.4rem;flex-wrap:wrap;}
+
+    /* COPY BUTTON — main star */
+    .copy-json-btn{
+      display:flex;align-items:center;gap:.4rem;
+      background:linear-gradient(135deg,#3b82f6,#10b981,#f97316);
+      background-size:200%;animation:gradShift 3s ease infinite;
+      color:#fff;font-family:'Syne',sans-serif;font-weight:900;
+      font-size:.82rem;padding:.5rem 1.1rem;border-radius:10px;
+      border:none;cursor:pointer;
+      box-shadow:0 4px 16px rgba(255,45,135,.35);
+      transition:transform .2s,box-shadow .2s;
+    }
+    .copy-json-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(255,107,0,.4);animation:none;}
+    .copy-json-btn.copied{background:linear-gradient(135deg,#22c55e,#16a34a);animation:none;box-shadow:0 4px 16px rgba(34,197,94,.35);}
+
+    .dl-json-btn{display:flex;align-items:center;gap:.35rem;background:rgba(37,99,235,.08);border:1.5px solid var(--border2);color:#3b82f6;font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;padding:.48rem .9rem;border-radius:10px;cursor:pointer;transition:all .2s;}
+    .dl-json-btn:hover{background:rgba(37,99,235,.16);}
+
+    /* JSON PREVIEW */
+    .json-preview-wrap{position:relative;}
+    .json-preview{
+      width:100%;max-height:340px;overflow-y:auto;
+      padding:1rem 1.2rem;
+      background:var(--s2);
+      font-family:'Courier New',monospace;font-size:.72rem;
+      color:#93c5fd;line-height:1.65;
+      white-space:pre;overflow-x:auto;
+      border:none;outline:none;resize:none;
+      cursor:default;
+    }
+    .json-preview::-webkit-scrollbar{width:5px;height:5px;}
+    .json-preview::-webkit-scrollbar-track{background:var(--s1);}
+    .json-preview::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:99px;}
+
+    .json-copy-overlay{
+      position:absolute;inset:0;display:none;
+      background:rgba(34,197,94,.12);
+      border:2px solid rgba(34,197,94,.4);
+      border-radius:0 0 16px 16px;
+      align-items:center;justify-content:center;
+      flex-direction:column;gap:.5rem;
+      animation:fadeIn .2s ease;
+      pointer-events:none;
+    }
+    .json-copy-overlay.show{display:flex;}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    .json-copy-overlay-icon{font-size:2.5rem;animation:bounceIn .3s cubic-bezier(.16,1,.3,1);}
+    @keyframes bounceIn{from{transform:scale(.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+    .json-copy-overlay-text{font-family:'Syne',sans-serif;font-weight:900;font-size:1rem;color:var(--success);}
+    .json-copy-overlay-sub{font-size:.75rem;color:var(--success);opacity:.8;font-weight:600;}
+
+    /* HOW TO USE */
+    .how-to-box{background:rgba(16,185,129,.06);border:1.5px solid rgba(16,185,129,.2);border-radius:14px;padding:.9rem 1.1rem;}
+    .how-to-title{font-size:.7rem;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;}
+    .how-to-steps{display:flex;flex-direction:column;gap:.4rem;}
+    .how-to-step{display:flex;align-items:flex-start;gap:.6rem;font-size:.72rem;color:var(--muted);font-weight:500;line-height:1.5;}
+    .step-num{background:linear-gradient(135deg,#3b82f6,#10b981);color:#fff;font-family:'Syne',sans-serif;font-weight:900;font-size:.65rem;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.05rem;}
+    .step-highlight{color:#10b981;font-weight:700;}
+
+    /* PRODUCTS LIST */
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.9rem;}
+    .empty-state{text-align:center;padding:3.5rem 2rem;color:var(--muted);}
+    .empty-state .ei{font-size:3rem;margin-bottom:.8rem;}
+    .empty-state p{font-size:.85rem;line-height:1.8;}
+
+    .pcard{background:var(--s1);border-radius:14px;overflow:hidden;border:1.5px solid var(--border);transition:transform .2s,box-shadow .2s;}
+    .pcard:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(37,99,235,.15);}
+    .pcard.published{border-color:rgba(34,197,94,.3);}
+    .pcard-img{width:100%;height:120px;object-fit:cover;display:block;}
+    .pcard-img-placeholder{width:100%;height:120px;background:var(--s2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.3rem;}
+    .pcard-img-placeholder span{font-size:1.8rem;}
+    .pcard-img-placeholder p{font-size:.62rem;color:var(--muted);}
+    .pcard-body{padding:.8rem;}
+    .pcard-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.4rem;margin-bottom:.28rem;}
+    .pcard-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.82rem;color:var(--text);line-height:1.3;}
+    .status-pill{font-size:.52rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.15rem .45rem;border-radius:99px;flex-shrink:0;}
+    .status-pill.live{background:rgba(34,197,94,.12);color:var(--success);border:1px solid rgba(34,197,94,.25);}
+    .status-pill.draft{background:rgba(155,96,128,.1);color:var(--muted);border:1px solid rgba(155,96,128,.2);}
+    .pcard-vars{font-size:.65rem;color:var(--muted);margin-bottom:.28rem;}
+    .pcard-price{font-family:'Syne',sans-serif;font-size:.9rem;background:linear-gradient(135deg,#3b82f6,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.55rem;}
+    .pcard-actions{display:flex;gap:.3rem;flex-wrap:wrap;}
+    .pcbtn{padding:.28rem .55rem;border-radius:7px;font-size:.62rem;font-weight:700;cursor:pointer;border:1px solid;font-family:'DM Sans',sans-serif;transition:all .15s;}
+    .pcbtn.edit{background:rgba(37,99,235,.08);border-color:var(--border2);color:#3b82f6;}
+    .pcbtn.edit:hover{background:rgba(37,99,235,.18);}
+    .pcbtn.pub{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.25);color:var(--success);}
+    .pcbtn.pub:hover{background:rgba(34,197,94,.18);}
+    .pcbtn.unpub{background:rgba(155,96,128,.08);border-color:var(--border);color:var(--muted);}
+    .pcbtn.del{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.2);color:var(--danger);}
+    .pcbtn.del:hover{background:rgba(248,113,113,.2);}
+
+    /* DELETE MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.75);align-items:center;justify-content:center;}
+    .modal-overlay.show{display:flex;}
+    .modal-box{background:var(--s1);border-radius:20px;padding:2rem;max-width:320px;width:90%;border:2px solid var(--border2);animation:popIn .3s cubic-bezier(.16,1,.3,1);}
+    .modal-title{font-family:'Syne',sans-serif;font-weight:900;font-size:1.05rem;color:var(--text);margin-bottom:.45rem;}
+    .modal-desc{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:1.3rem;}
+    .modal-actions{display:flex;gap:.6rem;justify-content:flex-end;}
+    .modal-cancel{padding:.48rem 1.1rem;border-radius:10px;border:1.5px solid var(--border2);background:transparent;color:var(--muted);font-size:.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;}
+    .modal-confirm{padding:.48rem 1.1rem;border-radius:10px;background:var(--danger);border:none;color:#fff;font-size:.8rem;cursor:pointer;font-family:'Syne',sans-serif;font-weight:800;}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(10px);z-index:9999;padding:.6rem 1.3rem;border-radius:99px;font-size:.8rem;font-weight:700;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    #toast.ok{background:rgba(34,197,94,.15);color:var(--success);border:1px solid rgba(34,197,94,.3);}
+    #toast.err{background:rgba(248,113,113,.15);color:var(--danger);border:1px solid rgba(248,113,113,.3);}
+    #toast.info{background:rgba(37,99,235,.12);color:#3b82f6;border:1px solid rgba(37,99,235,.25);}
+
+    /* GITHUB SETTINGS PANEL */
+    .gh-panel{background:rgba(16,185,129,.05);border:1.5px solid rgba(16,185,129,.2);border-radius:14px;overflow:hidden;transition:all .3s;}
+    .gh-panel-header{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;cursor:pointer;user-select:none;}
+    .gh-panel-title{font-size:.72rem;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:.45rem;}
+    .gh-panel-arrow{font-size:.65rem;color:#10b981;transition:transform .25s;}
+    .gh-panel-arrow.open{transform:rotate(180deg);}
+    .gh-panel-body{display:none;padding:.2rem 1rem .9rem;display:flex;flex-direction:column;gap:.55rem;}
+    .gh-panel-body.collapsed{display:none;}
+    .gh-status{display:flex;align-items:center;gap:.4rem;font-size:.67rem;font-weight:700;padding:.25rem .7rem;border-radius:99px;width:fit-content;margin-bottom:.15rem;}
+    .gh-status.connected{background:rgba(34,197,94,.12);color:var(--success);border:1px solid rgba(34,197,94,.25);}
+    .gh-status.disconnected{background:rgba(248,113,113,.1);color:var(--danger);border:1px solid rgba(248,113,113,.2);}
+
+    /* PUSH BUTTON */
+    .push-github-btn{
+      display:flex;align-items:center;gap:.4rem;
+      background:linear-gradient(135deg,#10b981,#059669,#10b981);
+      background-size:200%;animation:gradShift 3s ease infinite;
+      color:#fff;font-family:'Syne',sans-serif;font-weight:900;
+      font-size:.82rem;padding:.5rem 1.1rem;border-radius:10px;
+      border:none;cursor:pointer;
+      box-shadow:0 4px 16px rgba(16,185,129,.35);
+      transition:transform .2s,box-shadow .2s;
+      white-space:nowrap;
+    }
+    .push-github-btn:hover{transform:translateY(-1px);}
+    .push-github-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;animation:none;}
+    .push-github-btn.pushing{background:linear-gradient(135deg,#3b82f6,#1d4ed8);animation:none;}
+    .push-github-btn.success{background:linear-gradient(135deg,#22c55e,#16a34a);animation:none;box-shadow:0 4px 16px rgba(34,197,94,.35);}
+    .push-github-btn.error{background:linear-gradient(135deg,#ef4444,#dc2626);animation:none;box-shadow:0 4px 16px rgba(239,68,68,.35);}
+
+    /* FILE UPLOAD */
+    .file-upload-zone{border:2px dashed var(--border2);border-radius:10px;padding:1rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--s2);position:relative;}
+    .file-upload-zone:hover,.file-upload-zone.drag{border-color:#3b82f6;background:rgba(37,99,235,.06);}
+    .file-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+    .file-upload-icon{font-size:1.5rem;margin-bottom:.3rem;}
+    .file-upload-label{font-size:.72rem;color:var(--muted);font-weight:600;line-height:1.5;}
+    .file-upload-label strong{color:#3b82f6;}
+    .file-upload-name{font-size:.65rem;color:#10b981;font-weight:700;margin-top:.3rem;}
+    .img-upload-actions{display:flex;gap:.4rem;margin-top:.4rem;}
+    .img-clear-btn{flex:1;padding:.38rem;border-radius:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);color:var(--danger);font-size:.65rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .img-clear-btn:hover{background:rgba(248,113,113,.18);}
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <span class="login-emoji">⚡</span>
+    <div class="login-brand">IncomeEdge™ Admin</div>
+    <p class="login-sub">Admin access only 🔐</p>
+    <label class="lbl">Username</label>
+    <input class="inp" id="loginUser" type="text" placeholder="admin" autocomplete="username"/>
+    <label class="lbl">Password</label>
+    <input class="inp" id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">🔐 Login</button>
+    <div class="login-err" id="loginErr">❌ Wrong credentials.</div>
+      </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="tb-left">
+      <span style="font-size:1.2rem;">✨</span>
+      <span class="tb-brand">IncomeEdge™ Admin</span>
+      <span class="tb-badge" id="modeBadge">Clipboard Mode</span>
+    </div>
+    <div class="tb-right">
+      <button class="tb-btn" onclick="window.open('index.html','_blank')">👁 Home</button>
+      <button class="tb-btn" onclick="window.open('course.html','_blank')">📚 Courses</button>
+      <button class="tb-btn" onclick="window.open('tools.html','_blank')">🛠️ Tools</button>
+      <button class="tb-btn" onclick="window.open('ecommerce.html','_blank')">🛒 E-Com</button>
+      <button class="tb-btn" onclick="toggleGhPanel()" id="ghSettingsBtn" style="color:#10b981;border-color:rgba(16,185,129,.3);">⚙️ GitHub</button>
+      <button class="tb-btn tb-logout" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR: FORM -->
+    <div class="sidebar">
+      <div class="form-title" id="formHeading">✨ Add New Product</div>
+
+      <!-- GITHUB SETTINGS PANEL -->
+      <div class="gh-panel" id="ghPanel">
+        <div class="gh-panel-header" onclick="toggleGhPanel()">
+          <div class="gh-panel-title">🐙 GitHub Settings <span id="ghStatusDot" style="font-size:.9rem;">⚪</span></div>
+          <span class="gh-panel-arrow" id="ghArrow">▼</span>
+        </div>
+        <div class="gh-panel-body collapsed" id="ghPanelBody">
+          <div class="gh-status disconnected" id="ghStatusBadge">⚡ Not configured</div>
+          <div class="fgroup">
+            <label class="flabel">GitHub Token (PAT)</label>
+            <input class="finput" id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx" oninput="saveGhSettings()" autocomplete="off" style="font-size:.78rem;padding:.52rem .75rem;"/>
+            <div class="img-hint">Personal Access Token — <strong>repo</strong> scope required. Stored in sessionStorage only.</div>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">GitHub Username</label>
+            <input class="finput" id="ghUser" placeholder="your-username" oninput="saveGhSettings()" style="font-size:.78rem;padding:.52rem .75rem;"/>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Repo Name</label>
+            <input class="finput" id="ghRepo" placeholder="my-site" oninput="saveGhSettings()" style="font-size:.78rem;padding:.52rem .75rem;"/>
+          </div>
+          <div class="fgroup">
+            <label class="flabel">Branch</label>
+            <input class="finput" id="ghBranch" placeholder="main" oninput="saveGhSettings()" style="font-size:.78rem;padding:.52rem .75rem;"/>
+            <div class="img-hint">Default: <strong>main</strong>. Palitan kung <strong>master</strong> o iba pa.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TITLE -->
+      <div class="fgroup">
+        <label class="flabel">Product Title <span class="req">*</span></label>
+        <input class="finput" id="fTitle" placeholder="e.g. Digital Marketing Mastery"/>
+      </div>
+
+      <!-- CATEGORY -->
+      <div class="fgroup">
+        <label class="flabel">Category <span class="req">*</span></label>
+        <select class="finput" id="fCategory" style="cursor:pointer;">
+          <option value="business">📚 Business / Course</option>
+          <option value="tools">🛠️ Tools</option>
+          <option value="ecommerce">🛒 E-Commerce</option>
+        </select>
+      </div>
+
+      <!-- SHORT DESC -->
+      <div class="fgroup">
+        <label class="flabel">Short Description <span class="req">*</span></label>
+        <textarea class="ftextarea" id="fDesc" placeholder="Shown on product cards…" style="min-height:60px;"></textarea>
+      </div>
+
+      <!-- IMAGE -->
+      <div class="fgroup">
+        <label class="flabel">Product Image <span class="req">*</span></label>
+        <div class="file-upload-zone" id="uploadZone" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+          <input type="file" id="fImageFile" accept="image/*" onchange="onFileSelect(event)"/>
+          <div class="file-upload-icon">🖼️</div>
+          <div class="file-upload-label"><strong>Click to upload</strong> or drag & drop<br>PNG, JPG, WEBP — max 5MB</div>
+          <div class="file-upload-name" id="uploadFileName" style="display:none;"></div>
+        </div>
+
+        <!-- SAVE AS FILENAME -->
+        <div id="saveAsRow" style="display:none;margin-top:.5rem;">
+          <label class="flabel">Save as filename <span class="req">*</span></label>
+          <div style="display:flex;align-items:center;gap:.4rem;">
+            <input class="finput" id="fSaveAs" placeholder="e.g. Millionaire-Partner-System" oninput="onSaveAsInput()" style="font-size:.78rem;padding:.5rem .75rem;flex:1;"/>
+            <span id="fSaveAsExt" style="font-size:.72rem;color:#10b981;font-weight:700;white-space:nowrap;"></span>
+          </div>
+          <div class="img-hint">Palitan ang filename bago i-push sa GitHub. <strong>Huwag lagyan ng extension</strong> — awtomatiko.</div>
+        </div>
+
+        <div class="img-upload-actions" id="imgClearRow" style="display:none;">
+          <button class="img-clear-btn" onclick="clearImage()">✕ Remove Image</button>
+        </div>
+        <!-- hidden: holds the path used in JSON (set after GitHub upload or for existing products) -->
+        <input type="hidden" id="fImageUrl"/>
+        <img class="img-preview" id="imgPreview" src="" alt="Preview"/>
+        <div class="img-err" id="imgErr">⚠️ Image too large or invalid format.</div>
+      </div>
+
+      <hr class="fdivider"/>
+
+      <!-- VARIANTS -->
+      <div>
+        <div class="variants-head">
+          <span class="flabel">Packages / Variants <span class="req">*</span></span>
+          <button class="add-variant-btn" onclick="addVariantRow()">+ Add Package</button>
+        </div>
+        <div class="variants-sublabel">Each package = Name + Price (USD) + Checkout Link.</div>
+        <div class="variants-list" id="variantsList"></div>
+      </div>
+
+      <hr class="fdivider"/>
+
+      <!-- PUBLISH -->
+      <div class="publish-row" onclick="document.getElementById('fPublish').click()">
+        <input type="checkbox" id="fPublish" onclick="event.stopPropagation()"/>
+        <label for="fPublish" onclick="event.stopPropagation()">Publish to homepage</label>
+      </div>
+
+      <button class="save-btn" onclick="saveProduct()">
+        <span id="saveBtnIcon">✨</span>
+        <span id="saveBtnText">Save Product</span>
+      </button>
+      <button class="reset-btn" onclick="resetForm()">✕ Clear Form</button>
+    </div>
+
+    <!-- MAIN PANEL -->
+    <div class="main-panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Products & JSON Export</div>
+          <div class="panel-meta" id="panelMeta">Loading…</div>
+        </div>
+        <div class="filter-row">
+          <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+          <button class="filter-btn" onclick="setFilter('published',this)">Live</button>
+          <button class="filter-btn" onclick="setFilter('draft',this)">Draft</button>
+        </div>
+      </div>
+
+      <!-- ══ JSON EXPORT BOX ══ -->
+      <div class="json-export-box">
+        <div class="json-export-header">
+          <div class="json-export-title">
+            📋 Generated JSON
+            <span style="font-size:.65rem;font-weight:600;color:var(--muted);font-family:'DM Sans',sans-serif;">— auto-updates on every change</span>
+          </div>
+          <div class="json-export-actions">
+            <button class="push-github-btn" id="pushGhBtn" onclick="pushToGitHub()" title="Push products.json directly to GitHub repo">
+              🚀 Push to GitHub
+            </button>
+            <button class="copy-json-btn" id="copyJsonBtn" onclick="copyJSON()">
+              📋 Copy JSON
+            </button>
+            <button class="dl-json-btn" onclick="downloadJSON()">⬇ Download</button>
+            <button class="dl-json-btn" onclick="generateSitemap()" style="background:linear-gradient(135deg,#10b981,#059669);border-color:#10b981;" title="Download sitemap.xml with all published products">🗺 Sitemap</button>
+          </div>
+        </div>
+        <div class="json-preview-wrap">
+          <textarea class="json-preview" id="jsonPreview" readonly spellcheck="false"></textarea>
+          <div class="json-copy-overlay" id="copyOverlay">
+            <div class="json-copy-overlay-icon">✅</div>
+            <div class="json-copy-overlay-text">JSON Copied!</div>
+            <div class="json-copy-overlay-sub">Paste mo na sa products.json mo 🎉</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOW TO USE -->
+      <div class="how-to-box">
+        <div class="how-to-title">📖 Paano gamitin</div>
+        <div class="how-to-steps">
+          <div class="how-to-step"><div class="step-num">1</div><div>I-setup ang <span class="step-highlight">⚙️ GitHub Settings</span> — PAT token, username, at repo name.</div></div>
+          <div class="how-to-step"><div class="step-num">2</div><div>Mag-add o mag-edit ng product. I-upload ang image — awtomatikong pupunta sa <span class="step-highlight">/images/</span> ng GitHub.</div></div>
+          <div class="how-to-step"><div class="step-num">3</div><div>Click ang <span class="step-highlight">🚀 Push to GitHub</span> — direct na ipo-push ang <span class="step-highlight">products.json</span> sa repo mo.</div></div>
+          <div class="how-to-step"><div class="step-num">4</div><div>Walang GitHub? Gamitin ang <span class="step-highlight">📋 Copy JSON</span> o <span class="step-highlight">⬇ Download</span> para manual na i-save.</div></div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS GRID -->
+      <div id="productsGrid" class="products-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="delModal">
+  <div class="modal-box">
+    <div class="modal-title">🗑 Delete Product?</div>
+    <div class="modal-desc">Matatanggal ang product. I-copy at i-paste ang JSON after para ma-save.</div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-confirm" id="confirmDelBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  /* ── AUTH ── */
+  const ADMIN_USER='admin', ADMIN_PASS='glowcore2026';
+  function doLogin(){
+    if(document.getElementById('loginUser').value.trim()===ADMIN_USER&&document.getElementById('loginPass').value===ADMIN_PASS){
+      document.getElementById('loginScreen').style.display='none';
+      document.getElementById('app').classList.add('on');
+      loadProducts();
+    }else{
+      document.getElementById('loginErr').classList.add('show');
+    }
+  }
+  function logout(){
+    document.getElementById('loginScreen').style.display='flex';
+    document.getElementById('app').classList.remove('on');
+  }
+
+  /* ── STATE ── */
+  let products=[], editingId=null, deleteId=null, currentFilter='all', variantCounter=0;
+
+  /* ── LOAD ── */
+  async function loadProducts(){
+    loadGhSettings();
+    try{
+      const res=await fetch('products.json?t='+Date.now());
+      products=await res.json();
+      refreshAll();
+      toast('✅ Loaded from products.json','ok');
+    }catch(e){
+      products=[];refreshAll();
+      toast('⚠️ products.json not found — start adding!','info');
+    }
+  }
+
+  /* ── GITHUB SETTINGS ── */
+  function loadGhSettings(){
+    document.getElementById('ghToken').value=sessionStorage.getItem('gh_token')||'';
+    document.getElementById('ghUser').value=sessionStorage.getItem('gh_user')||'';
+    document.getElementById('ghRepo').value=sessionStorage.getItem('gh_repo')||'';
+    document.getElementById('ghBranch').value=sessionStorage.getItem('gh_branch')||'main';
+    updateGhStatus();
+  }
+  function saveGhSettings(){
+    sessionStorage.setItem('gh_token',document.getElementById('ghToken').value.trim());
+    sessionStorage.setItem('gh_user',document.getElementById('ghUser').value.trim());
+    sessionStorage.setItem('gh_repo',document.getElementById('ghRepo').value.trim());
+    sessionStorage.setItem('gh_branch',document.getElementById('ghBranch').value.trim()||'main');
+    updateGhStatus();
+  }
+  function getGhCreds(){
+    return{
+      token:sessionStorage.getItem('gh_token')||'',
+      user:sessionStorage.getItem('gh_user')||'',
+      repo:sessionStorage.getItem('gh_repo')||'',
+      branch:sessionStorage.getItem('gh_branch')||'main'
+    };
+  }
+  function updateGhStatus(){
+    const {token,user,repo}=getGhCreds();
+    const ok=token&&user&&repo;
+    const badge=document.getElementById('ghStatusBadge');
+    const dot=document.getElementById('ghStatusDot');
+    const modeBadge=document.getElementById('modeBadge');
+    if(ok){
+      badge.className='gh-status connected';badge.textContent='✅ Connected';
+      dot.textContent='🟢';
+      modeBadge.textContent='GitHub Mode';modeBadge.style.color='#10b981';modeBadge.style.borderColor='rgba(16,185,129,.35)';
+    }else{
+      badge.className='gh-status disconnected';badge.textContent='⚡ Not configured';
+      dot.textContent='⚪';
+      modeBadge.textContent='Clipboard Mode';modeBadge.style.color='';modeBadge.style.borderColor='';
+    }
+  }
+  let ghPanelOpen=false;
+  function toggleGhPanel(){
+    ghPanelOpen=!ghPanelOpen;
+    const body=document.getElementById('ghPanelBody');
+    const arrow=document.getElementById('ghArrow');
+    body.classList.toggle('collapsed',!ghPanelOpen);
+    arrow.classList.toggle('open',ghPanelOpen);
+  }
+
+  /* ── IMAGE FILE UPLOAD ── */
+  let currentImageFile=null; // holds the File object
+  let currentImageBase64=null; // holds base64 string (data url stripped)
+  let currentImageMime=null;
+
+  function onDragOver(e){e.preventDefault();document.getElementById('uploadZone').classList.add('drag');}
+  function onDragLeave(e){document.getElementById('uploadZone').classList.remove('drag');}
+  function onDrop(e){e.preventDefault();document.getElementById('uploadZone').classList.remove('drag');const f=e.dataTransfer.files[0];if(f)processImageFile(f);}
+  function onFileSelect(e){const f=e.target.files[0];if(f)processImageFile(f);}
+
+  function processImageFile(file){
+    const err=document.getElementById('imgErr');
+    if(!file.type.startsWith('image/')){err.textContent='⚠️ Invalid file type. Please pick an image.';err.classList.add('show');return;}
+    if(file.size>5*1024*1024){err.textContent='⚠️ Image too large (max 5MB).';err.classList.add('show');return;}
+    err.classList.remove('show');
+    currentImageFile=file;
+    currentImageMime=file.type;
+    // get extension from original file
+    const origExt=file.name.includes('.')?'.'+file.name.split('.').pop().toLowerCase():'';
+    // pre-fill save-as with original filename (without extension)
+    const origBase=file.name.includes('.')?file.name.substring(0,file.name.lastIndexOf('.')):file.name;
+    document.getElementById('fSaveAs').value=origBase;
+    document.getElementById('fSaveAsExt').textContent=origExt;
+    document.getElementById('saveAsRow').style.display='block';
+    // Use ArrayBuffer for reliable base64
+    const readerArr=new FileReader();
+    readerArr.onload=(ev)=>{
+      const bytes=new Uint8Array(ev.target.result);
+      let binary='';
+      for(let i=0;i<bytes.byteLength;i++)binary+=String.fromCharCode(bytes[i]);
+      currentImageBase64=btoa(binary);
+    };
+    readerArr.readAsArrayBuffer(file);
+    // Preview
+    const readerUrl=new FileReader();
+    readerUrl.onload=(ev)=>{
+      const preview=document.getElementById('imgPreview');
+      preview.src=ev.target.result;preview.classList.add('show');
+      document.getElementById('uploadFileName').textContent='📎 '+file.name;
+      document.getElementById('uploadFileName').style.display='block';
+      document.getElementById('imgClearRow').style.display='flex';
+      updateSaveAsFilename();
+    };
+    readerUrl.readAsDataURL(file);
+  }
+
+  function getImageExt(){
+    if(!currentImageFile)return '';
+    const name=currentImageFile.name;
+    return name.includes('.')?'.'+name.split('.').pop().toLowerCase():'';
+  }
+
+  function onSaveAsInput(){
+    updateSaveAsFilename();
+  }
+
+  function updateSaveAsFilename(){
+    const saveAs=document.getElementById('fSaveAs').value.trim();
+    const ext=getImageExt();
+    if(saveAs&&ext){
+      const finalName=saveAs+ext;
+      document.getElementById('fImageUrl').value='images/'+finalName;
+      document.getElementById('fSaveAsExt').textContent=ext;
+    }
+  }
+
+  function clearImage(){
+    currentImageFile=null;currentImageBase64=null;currentImageMime=null;
+    document.getElementById('fImageFile').value='';
+    document.getElementById('fImageUrl').value='';
+    document.getElementById('fSaveAs').value='';
+    document.getElementById('fSaveAsExt').textContent='';
+    document.getElementById('saveAsRow').style.display='none';
+    document.getElementById('imgPreview').classList.remove('show');
+    document.getElementById('imgPreview').src='';
+    document.getElementById('uploadFileName').style.display='none';
+    document.getElementById('imgClearRow').style.display='none';
+    document.getElementById('imgErr').classList.remove('show');
+    document.getElementById('uploadZone').classList.remove('drag');
+  }
+
+  function previewImg(){
+    // legacy: used when loading existing product with imageUrl
+    const url=document.getElementById('fImageUrl').value.trim();
+    const preview=document.getElementById('imgPreview');
+    const err=document.getElementById('imgErr');
+    if(url&&!currentImageBase64){
+      preview.src=url;preview.classList.add('show');
+      preview.onload=()=>err.classList.remove('show');
+      preview.onerror=()=>{err.textContent='⚠️ Image not found.';err.classList.add('show');};
+    }
+  }
+
+  /* ── VARIANTS ── */
+  function addVariantRow(name='',price='',link=''){
+    variantCounter++;
+    const list=document.getElementById('variantsList');
+    const num=list.children.length+1;
+    const row=document.createElement('div');
+    row.className='variant-row';
+    row.dataset.vid=variantCounter;
+    row.innerHTML=`
+      <div class="variant-row-top">
+        <span class="variant-index">Package ${num}</span>
+        <button class="remove-variant-btn" onclick="removeVariant(this)">✕</button>
+      </div>
+      <div class="variant-fields">
+        <div>
+          <div class="vfield-label">Name</div>
+          <input class="finput" placeholder="Package 1" value="${esc(name)}" data-vf="name"/>
+        </div>
+        <div>
+          <div class="vfield-label">Price (USD)</div>
+          <input class="finput" placeholder="$12" value="${esc(price)}" data-vf="price"/>
+        </div>
+      </div>
+      <div class="variant-link">
+        <div class="vfield-label">Affiliate Link <span style="color:var(--danger)">*</span></div>
+        <input class="finput" placeholder="https://…" value="${esc(link)}" data-vf="affiliateLink"/>
+      </div>
+    `;
+    list.appendChild(row);
+    renumberVariants();
+  }
+
+  function removeVariant(btn){btn.closest('.variant-row').remove();renumberVariants();}
+  function renumberVariants(){
+    document.querySelectorAll('#variantsList .variant-row').forEach((row,i)=>{
+      row.querySelector('.variant-index').textContent='Package '+(i+1);
+    });
+  }
+  function getVariants(){
+    return Array.from(document.querySelectorAll('#variantsList .variant-row')).map(row=>({
+      name:row.querySelector('[data-vf="name"]').value.trim(),
+      price:row.querySelector('[data-vf="price"]').value.trim(),
+      affiliateLink:row.querySelector('[data-vf="affiliateLink"]').value.trim(),
+    })).filter(v=>v.name||v.price||v.affiliateLink);
+  }
+
+  /* ── FORM ── */
+  function resetForm(){
+    editingId=null;
+    ['fTitle','fDesc'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('fPublish').checked=false;
+    document.getElementById('fCategory').value='business';
+    clearImage();
+    document.getElementById('variantsList').innerHTML='';
+    variantCounter=0;
+    document.getElementById('formHeading').textContent='✨ Add New Product';
+    document.getElementById('saveBtnIcon').textContent='✨';
+    document.getElementById('saveBtnText').textContent='Save Product';
+  }
+
+  function loadForEdit(id){
+    const p=products.find(x=>x.id===id);if(!p)return;
+    editingId=id;
+    document.getElementById('fTitle').value=p.title||'';
+    document.getElementById('fDesc').value=p.description||'';
+    // load existing image url (no file object — just set the hidden field and preview)
+    currentImageFile=null;currentImageBase64=null;currentImageMime=null;
+    document.getElementById('fImageFile').value='';
+    document.getElementById('fImageUrl').value=p.imageUrl||'';
+    document.getElementById('uploadFileName').textContent=p.imageUrl?'📎 '+p.imageUrl.split('/').pop():'';
+    document.getElementById('uploadFileName').style.display=p.imageUrl?'block':'none';
+    document.getElementById('imgClearRow').style.display=p.imageUrl?'flex':'none';
+    document.getElementById('imgErr').classList.remove('show');
+    previewImg();
+    document.getElementById('fPublish').checked=!!p.published;
+    document.getElementById('fCategory').value=p.category||'business';
+    document.getElementById('variantsList').innerHTML='';
+    variantCounter=0;
+    (p.variants||[]).forEach(v=>addVariantRow(v.name,v.price,v.affiliateLink||v.checkoutLink||''));
+    document.getElementById('formHeading').textContent='✎ Edit Product';
+    document.getElementById('saveBtnIcon').textContent='✎';
+    document.getElementById('saveBtnText').textContent='Update Product';
+    document.querySelector('.sidebar').scrollIntoView({behavior:'smooth'});
+  }
+
+  function makeId(title){
+    return (title||'product').toLowerCase().replace(/[^a-z0-9]/g,'').substring(0,10)+'_'+Date.now().toString(36);
+  }
+
+  function saveProduct(){
+    const title=document.getElementById('fTitle').value.trim();
+    const desc=document.getElementById('fDesc').value.trim();
+    const imageUrl=document.getElementById('fImageUrl').value.trim();
+    const variants=getVariants();
+    if(!title){toast('Title is required!','err');return;}
+    if(!desc){toast('Short description is required!','err');return;}
+    if(!imageUrl){toast('Please upload or set an image!','err');return;}
+    if(!variants.length){toast('Add at least 1 package/variant!','err');return;}
+    if(variants.find(v=>!v.affiliateLink)){toast('Every package needs an affiliate link!','err');return;}
+
+    const published=document.getElementById('fPublish').checked;
+    const category=document.getElementById('fCategory').value||'business';
+    const now=new Date().toISOString();
+
+    if(editingId){
+      const idx=products.findIndex(x=>x.id===editingId);
+      if(idx!==-1){
+        products[idx]={...products[idx],title,description:desc,imageUrl,published,category,variants,updatedAt:now};
+        toast('✅ Updated! Push to GitHub or copy JSON.','ok');
+      }
+    }else{
+      const rec=products.filter(x=>x.published).slice(0,2).map(x=>x.id);
+      products.unshift({id:makeId(title),title,description:desc,imageUrl,published,category,variants,recommended:rec,createdAt:now,updatedAt:now});
+      toast('✅ Added! Push to GitHub or copy JSON.','ok');
+    }
+    resetForm();
+    refreshAll();
+  }
+
+  function togglePublish(id){
+    const p=products.find(x=>x.id===id);if(!p)return;
+    p.published=!p.published;
+    refreshAll();
+    toast(p.published?'🌐 Live! Copy JSON to save.':'🔒 Draft. Copy JSON to save.','ok');
+  }
+
+  function confirmDelete(id){
+    deleteId=id;
+    document.getElementById('delModal').classList.add('show');
+    document.getElementById('confirmDelBtn').onclick=()=>{
+      products=products.filter(x=>x.id!==deleteId);
+      refreshAll();closeModal();
+      toast('🗑 Deleted. Copy JSON to save.','err');
+    };
+  }
+  function closeModal(){document.getElementById('delModal').classList.remove('show');deleteId=null;}
+
+  /* ── JSON GENERATION ── */
+  function generateJSON(){
+    return JSON.stringify(products,null,2);
+  }
+
+  function updateJSONPreview(){
+    const preview=document.getElementById('jsonPreview');
+    if(preview) preview.value=generateJSON();
+  }
+
+  /* ── COPY JSON — MAIN FEATURE ── */
+  let copyTimer;
+  function copyJSON(){
+    const json=generateJSON();
+    const btn=document.getElementById('copyJsonBtn');
+    const overlay=document.getElementById('copyOverlay');
+
+    navigator.clipboard.writeText(json).then(()=>{
+      showCopied(btn,overlay);
+    }).catch(()=>{
+      /* fallback for older browsers */
+      const ta=document.createElement('textarea');
+      ta.value=json;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showCopied(btn,overlay);
+    });
+  }
+
+  function showCopied(btn,overlay){
+    /* button state */
+    btn.classList.add('copied');
+    btn.textContent='✅ Copied!';
+    /* overlay */
+    overlay.classList.add('show');
+    /* reset after delay */
+    clearTimeout(copyTimer);
+    copyTimer=setTimeout(()=>{
+      btn.classList.remove('copied');
+      btn.innerHTML='📋 Copy JSON';
+      overlay.classList.remove('show');
+    },2500);
+    toast('📋 JSON copied! Paste sa products.json mo.','ok');
+  }
+
+  /* ── DOWNLOAD ── */
+  function downloadJSON(){
+    const blob=new Blob([generateJSON()],{type:'application/json'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='products.json';a.click();
+    toast('📥 Downloaded!','ok');
+  }
+
+  /* ── PUSH TO GITHUB ── */
+  async function pushToGitHub(){
+    const {token,user,repo,branch}=getGhCreds();
+    if(!token||!user||!repo){
+      toast('⚙️ Setup GitHub settings first!','err');
+      if(!ghPanelOpen)toggleGhPanel();
+      return;
+    }
+    const btn=document.getElementById('pushGhBtn');
+
+    // Step 1: if there's a new image file, upload it first
+    if(currentImageFile&&currentImageBase64){
+      const saveAs=document.getElementById('fSaveAs').value.trim();
+      const ext=getImageExt();
+      if(!saveAs){
+        toast('⚠️ Lagyan ng filename ang image (Save as field)!','err');
+        btn.disabled=false;return;
+      }
+      const filename=saveAs+ext;
+      const imgPath='images/'+filename;
+      btn.disabled=true;btn.className='push-github-btn pushing';btn.textContent='📤 Uploading image…';
+      try{
+        // check if file exists (get SHA)
+        let imgSha=null;
+        const checkRes=await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${imgPath}`,{
+          headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}
+        });
+        if(checkRes.ok){const d=await checkRes.json();imgSha=d.sha;}
+        const imgBody={message:`Upload image: ${filename}`,content:currentImageBase64,branch:branch};
+        if(imgSha)imgBody.sha=imgSha;
+        const imgPut=await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${imgPath}`,{
+          method:'PUT',
+          headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+          body:JSON.stringify(imgBody)
+        });
+        if(!imgPut.ok){
+          const e=await imgPut.json();
+          throw new Error(`${imgPut.status}: ${e.message||'Image upload failed'}${e.errors?(' — '+JSON.stringify(e.errors)):''}`);}
+        toast('🖼️ Image uploaded!','ok');
+        // Use path without leading slash for GitHub Pages compatibility
+        const imgUrl=`images/${filename}`;
+        document.getElementById('fImageUrl').value=imgUrl;
+        // update the product in memory with correct path
+        if(editingId){const idx=products.findIndex(x=>x.id===editingId);if(idx!==-1)products[idx].imageUrl=imgUrl;}
+        // also update any product that had the temp path
+        products.forEach(p=>{if(p.imageUrl==='images/'+filename||p.imageUrl==='/images/'+filename)p.imageUrl=imgUrl;});
+        currentImageFile=null;currentImageBase64=null;currentImageMime=null;
+        updateJSONPreview();
+      }catch(e){
+        btn.disabled=false;btn.className='push-github-btn error';btn.textContent='❌ Image upload failed';
+        toast('❌ Image upload error: '+e.message,'err');
+        setTimeout(()=>{btn.className='push-github-btn';btn.textContent='🚀 Push to GitHub';},3000);
+        return;
+      }
+    }
+
+    // Step 2: push products.json
+    btn.disabled=true;btn.className='push-github-btn pushing';btn.textContent='⏳ Pushing…';
+    try{
+      // GET current SHA of products.json
+      let sha=null;
+      const getRes=await fetch(`https://api.github.com/repos/${user}/${repo}/contents/products.json`,{
+        headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}
+      });
+      if(getRes.ok){const d=await getRes.json();sha=d.sha;}
+      // PUT updated products.json
+      const content=btoa(unescape(encodeURIComponent(generateJSON())));
+      const putBody={message:'Update products.json via Admin Panel',content,branch:branch};
+      if(sha)putBody.sha=sha;
+      const putRes=await fetch(`https://api.github.com/repos/${user}/${repo}/contents/products.json`,{
+        method:'PUT',
+        headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+        body:JSON.stringify(putBody)
+      });
+      if(!putRes.ok){const e=await putRes.json();throw new Error(e.message||'Push failed');}
+      btn.className='push-github-btn success';btn.textContent='✅ Pushed!';
+      toast('🚀 Pushed to GitHub successfully!','ok');
+    }catch(e){
+      btn.className='push-github-btn error';btn.textContent='❌ Push failed';
+      toast('❌ GitHub error: '+e.message,'err');
+    }finally{
+      btn.disabled=false;
+      setTimeout(()=>{btn.className='push-github-btn';btn.textContent='🚀 Push to GitHub';},3500);
+    }
+  }
+
+  /* ── GENERATE SITEMAP ── */
+  function generateSitemap(){
+    const base=window.location.origin;
+    const today=new Date().toISOString().split('T')[0];
+    const published=products.filter(p=>p.published);
+    function makeSlug(t){return(t||'product').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60);}
+    const staticPages=[
+      {url:`${base}/index.html`,freq:'daily',priority:'1.0'},
+      {url:`${base}/course.html`,freq:'daily',priority:'0.9'},
+      {url:`${base}/tools.html`,freq:'daily',priority:'0.9'},
+      {url:`${base}/ecommerce.html`,freq:'daily',priority:'0.9'},
+    ];
+    const allUrls=[...staticPages];
+    const xml=`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${allUrls.map(u=>`  <url>
+    <loc>${u.url}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${u.freq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+    const blob=new Blob([xml],{type:'application/xml'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sitemap.xml';a.click();
+    toast(`🗺 Sitemap downloaded! ${published.length} products included. Upload to root folder.`,'ok');
+  }
+
+  /* ── REFRESH ALL ── */
+  function refreshAll(){
+    updateJSONPreview();
+    renderGrid();
+  }
+
+  /* ── RENDER GRID ── */
+  function setFilter(f,btn){
+    currentFilter=f;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');renderGrid();
+  }
+
+  function renderGrid(){
+    const grid=document.getElementById('productsGrid');
+    let list=[...products];
+    if(currentFilter==='published')list=list.filter(p=>p.published);
+    if(currentFilter==='draft')list=list.filter(p=>!p.published);
+    const total=products.length,live=products.filter(p=>p.published).length;
+    document.getElementById('panelMeta').textContent=`${total} product${total!==1?'s':''} · ${live} live`;
+    if(!list.length){
+      grid.innerHTML=`<div class="empty-state"><div class="ei">💖</div><p>${
+        currentFilter==='published'?'No published products.':
+        currentFilter==='draft'?'No drafts — all live!':
+        'No products yet.<br>Fill the form to add!'}</p></div>`;
+      return;
+    }
+    grid.innerHTML=list.map(p=>{
+      const v1=(p.variants&&p.variants[0])||null;
+      const vc=(p.variants||[]).length;
+      return `
+      <div class="pcard${p.published?' published':''}">
+        ${p.imageUrl
+          ?`<img class="pcard-img" src="${esc(p.imageUrl)}" alt="${esc(p.title||'')}" onerror="this.parentElement.innerHTML='<div class=pcard-img-placeholder><span>✨</span><p>No image</p></div>'">`
+          :`<div class="pcard-img-placeholder"><span>✨</span><p>No image</p></div>`}
+        <div class="pcard-body">
+          <div class="pcard-top">
+            <div class="pcard-title">${esc(p.title||'Untitled')}</div>
+            <span class="status-pill ${p.published?'live':'draft'}">${p.published?'● Live':'Draft'}</span>
+          </div>
+          <div class="pcard-vars" style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;">${vc} package${vc!==1?'s':''} <span style="font-size:.58rem;padding:.1rem .4rem;border-radius:6px;background:rgba(37,99,235,.12);color:#3b82f6;font-weight:700;">${p.category==='tools'?'🛠️ Tools':p.category==='ecommerce'?'🛒 E-Com':'📚 Business'}</span></div>
+          <div class="pcard-price">${v1?esc(v1.price):''}</div>
+          <div class="pcard-actions">
+            <button class="pcbtn edit" onclick="loadForEdit('${p.id}')">✎ Edit</button>
+            <button class="pcbtn ${p.published?'unpub':'pub'}" onclick="togglePublish('${p.id}')">${p.published?'Unpublish':'Publish'}</button>
+            <button class="pcbtn del" onclick="confirmDelete('${p.id}')">✕</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  let toastTimer;
+  function toast(msg,type='ok'){
+    const t=document.getElementById('toast');
+    t.textContent=msg;t.className=`show ${type}`;
+    clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.className=type;},3500);
+  }
+</script>
+</body>
+</html>
