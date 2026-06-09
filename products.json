@@ -1,5 +1,26 @@
 [
   {
+    "id": "jjsjs_mq67ep38",
+    "title": "jjsjs",
+    "description": "jekskkd",
+    "imageUrl": "/images/1656.jpg",
+    "published": true,
+    "category": "business",
+    "variants": [
+      {
+        "name": "kakskskks",
+        "price": "ksksksks",
+        "affiliateLink": "https://uswaterrevolution.com/#aff=goldenpanel"
+      }
+    ],
+    "recommended": [
+      "unlockdiam_mq62turh",
+      "millionair_mq4uqnpn"
+    ],
+    "createdAt": "2026-06-09T05:33:10.888Z",
+    "updatedAt": "2026-06-09T05:33:10.888Z"
+  },
+  {
     "id": "unlockdiam_mq62turh",
     "title": "Unlock Diamond Industry Secrets: Exclusive Member Area & Video Courses",
     "description": "Gain exclusive access to the diamond industry's best-kept secrets through our member area and video courses. This offer from a leading diamond vendor provides expert insights, strategies, and resources to enhance your knowledge and success in the diamond market.",
@@ -13,7 +34,10 @@
         "affiliateLink": "https://uswaterrevolution.com/#aff=goldenpanel"
       }
     ],
-    "recommended": ["millionair_mq4uqnpn", "superlaunc_mq4g0ss3"],
+    "recommended": [
+      "millionair_mq4uqnpn",
+      "superlaunc_mq4g0ss3"
+    ],
     "createdAt": "2026-06-09T03:25:00.025Z",
     "updatedAt": "2026-06-09T03:25:00.025Z"
   },
