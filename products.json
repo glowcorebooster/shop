@@ -19,43 +19,5 @@
     ],
     "createdAt": "2026-06-09T07:34:12.623Z",
     "updatedAt": "2026-06-09T07:34:12.623Z"
-  },
-  {
-    "id": "thegeniusw_mq6awdjz",
-    "title": "The Genius Wave Dowhhjnloads",
-    "description": "thegeniuswave has already accepted your request. You can start promoting the product using the link provided in the button above.",
-    "imageUrl": "images/TheGeniusWaveDownloads.webp",
-    "published": true,
-    "category": "business",
-    "variants": [
-      {
-        "name": "One Time Payment",
-        "price": "$49.97",
-        "affiliateLink": "https://ingeniuswave.com/DSvsl/#aff=goldenpanel"
-      }
-    ],
-    "recommended": [
-      "thegeniusw_mq6a13fz"
-    ],
-    "createdAt": "2026-06-09T07:10:54.617Z",
-    "updatedAt": "2026-06-09T07:10:54.617Z"
-  },
-  {
-    "id": "thegeniusw_mq6a13fz",
-    "title": "The Genius Wave Downloads",
-    "description": "thegeniuswave has already accepted your request. You can start promoting the product using the link provided in the button above.",
-    "imageUrl": "images/TheGeniusWaveDownloads.webp",
-    "published": true,
-    "category": "business",
-    "variants": [
-      {
-        "name": "One Time Payment",
-        "price": "$49.97",
-        "affiliateLink": "https://ingeniuswave.com/DSvsl/#aff=goldenpanel"
-      }
-    ],
-    "recommended": [],
-    "createdAt": "2026-06-09T06:46:35.177Z",
-    "updatedAt": "2026-06-09T06:46:35.177Z"
   }
 ]
