@@ -1,5 +1,26 @@
 [
   {
+    "id": "jajaja_mq65b5m2",
+    "title": "jajaja",
+    "description": "akjsjs",
+    "imageUrl": "https://glowcorebooster.github.io/shop/images/1681.jpg",
+    "published": true,
+    "category": "business",
+    "variants": [
+      {
+        "name": "ppk",
+        "price": "000",
+        "affiliateLink": "https://uswaterrevolution.com/#aff=goldenpanel"
+      }
+    ],
+    "recommended": [
+      "unlockdiam_mq64oksi",
+      "millionair_mq4uqnpn"
+    ],
+    "createdAt": "2026-06-09T04:34:26.423Z",
+    "updatedAt": "2026-06-09T04:34:26.423Z"
+  },
+  {
     "id": "unlockdiam_mq64oksi",
     "title": "Unlock Diamond Industry Secrets: Exclusive Member Area & Video Courses",
     "description": "Gain exclusive access to the diamond industry's best-kept secrets through our member area and video courses. This offer from a leading diamond vendor provides expert insights, strategies, and resources to enhance your knowledge and success in the diamond market.",
