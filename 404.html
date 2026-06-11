@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IncomeEdge Academy</title>
+  <script>
+    // GitHub Pages SPA redirect trick
+    // Converts /p/slug → /?p=/p/slug then index.html handles it
+    var path = window.location.pathname;
+    var search = window.location.search;
+    // If path matches /p/<slug>, redirect to product.html with id lookup via slug
+    if (path.indexOf('/p/') !== -1) {
+      var slug = path.split('/p/')[1] || '';
+      window.location.replace(
+        window.location.origin + 
+        window.location.pathname.split('/p/')[0].replace(/\/[^/]*$/, '') +
+        '/product.html?slug=' + slug
+      );
+    } else {
+      // Generic 404 - go home
+      window.location.replace(
+        window.location.href.replace(window.location.pathname, '/').replace('//', '/')
+      );
+    }
+  </script>
+</head>
+<body>Redirecting…</body>
+</html>
