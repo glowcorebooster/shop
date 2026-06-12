@@ -25,8 +25,10 @@
 
 # BEGIN Cloudflare Managed content
 
-User-agent: Amazonbot
-Disallow: /admin
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /products.json
 
 User-agent: Amazonbot
 Disallow: /
