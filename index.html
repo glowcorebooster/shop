@@ -407,7 +407,7 @@ loadProducts();
    2) Paste the doPost script (see GOOGLE-SHEETS-SETUP.txt included in this zip).
    3) Deploy > New deployment > Web app > Execute as Me > Who has access: Anyone.
    4) Copy the Web app URL and paste it below, replacing YOUR_GOOGLE_SCRIPT_URL_HERE. */
-const SHEET_WEBHOOK_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+const SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzp8EC0kVjGL1obCZ-4NwrlPyPs3yTP_tOb_Q54gNXNuvnaDqsFQGR6XAGV59N-sBUr/exec';
 
 function openLeadModal(){document.getElementById('leadModalOverlay').classList.add('show');}
 function closeLeadModal(){
@@ -432,7 +432,7 @@ function submitLeadForm(e){
     document.getElementById('leadForm').reset();
   };
 
-  if(!SHEET_WEBHOOK_URL||SHEET_WEBHOOK_URL.indexOf('YOUR_GOOGLE_SCRIPT_URL_HERE')!==-1){
+  if(!SHEET_WEBHOOK_URL||SHEET_WEBHOOK_URL.indexOf('https://script.google.com/macros/s/AKfycbzp8EC0kVjGL1obCZ-4NwrlPyPs3yTP_tOb_Q54gNXNuvnaDqsFQGR6XAGV59N-sBUr/exec')!==-1){
     finish();return;
   }
 
